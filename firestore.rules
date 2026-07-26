@@ -1,0 +1,36 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    match /tickets/{ticketId} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasAll(['id', 'customerName', 'phone', 'email', 'address', 'status', 'createdAt'])
+                   && request.resource.data.customerName is string
+                   && request.resource.data.customerName.size() <= 100;
+      allow update: if true;
+      allow delete: if false;
+    }
+
+    match /leads/{leadId} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasAll(['id', 'type', 'createdAt', 'customerName', 'address', 'jobEstimateValue', 'leadFee', 'isClaimed', 'status'])
+                   && request.resource.data.customerName is string;
+      allow update: if true;
+      allow delete: if false;
+    }
+
+    match /contractors/{contractorId} {
+      allow read: if true;
+      allow create, update: if true;
+      allow delete: if false;
+    }
+  }
+}

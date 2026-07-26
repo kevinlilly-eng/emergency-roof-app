@@ -1,0 +1,92 @@
+{
+  "entities": {
+    "DispatchTicket": {
+      "title": "Dispatch Ticket",
+      "description": "Emergency dispatch request for roof tarping and repairs",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "customerName": { "type": "string", "maxLength": 100 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "email": { "type": "string", "maxLength": 100 },
+        "address": { "type": "string", "maxLength": 200 },
+        "roofMaterial": { "type": "string" },
+        "roofPitch": { "type": "string" },
+        "stories": { "type": "number" },
+        "severity": { "type": "string" },
+        "status": { "type": "string" },
+        "hasActiveWaterLeak": { "type": "boolean" },
+        "estimatedDamageAreaSqFt": { "type": "number" },
+        "contractorAssigned": { "type": "string" },
+        "etaMinutes": { "type": "number" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" },
+        "notes": { "type": "string", "maxLength": 1000 }
+      },
+      "required": ["id", "customerName", "phone", "email", "address", "status", "createdAt"]
+    },
+    "LeadItem": {
+      "title": "Contractor Lead",
+      "description": "Roofing job lead available in marketplace or claimed by contractor",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "customerName": { "type": "string", "maxLength": 100 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "email": { "type": "string", "maxLength": 100 },
+        "address": { "type": "string", "maxLength": 200 },
+        "zipCode": { "type": "string", "maxLength": 10 },
+        "neighborhood": { "type": "string", "maxLength": 100 },
+        "roofMaterial": { "type": "string" },
+        "roofPitch": { "type": "string" },
+        "stories": { "type": "number" },
+        "sqFt": { "type": "number" },
+        "severity": { "type": "string" },
+        "jobEstimateValue": { "type": "number" },
+        "leadFee": { "type": "number" },
+        "isClaimed": { "type": "boolean" },
+        "claimedByContractorId": { "type": "string" },
+        "claimedAt": { "type": "string" },
+        "status": { "type": "string" },
+        "hasActiveLeak": { "type": "boolean" },
+        "notes": { "type": "string", "maxLength": 1000 },
+        "photoUrl": { "type": "string" }
+      },
+      "required": ["id", "type", "createdAt", "customerName", "address", "jobEstimateValue", "leadFee", "isClaimed", "status"]
+    },
+    "ContractorProfile": {
+      "title": "Contractor Profile",
+      "description": "Contractor profile details and wallet state",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "companyName": { "type": "string", "maxLength": 100 },
+        "contactName": { "type": "string", "maxLength": 100 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "email": { "type": "string", "maxLength": 100 },
+        "licenseNumber": { "type": "string", "maxLength": 100 },
+        "rating": { "type": "number" },
+        "completedJobsCount": { "type": "number" },
+        "isAvailable247": { "type": "boolean" },
+        "walletBalance": { "type": "number" }
+      },
+      "required": ["id", "companyName", "email", "walletBalance"]
+    }
+  },
+  "firestore": {
+    "/tickets/{ticketId}": {
+      "schema": { "$ref": "#/entities/DispatchTicket" },
+      "description": "Emergency dispatch tickets submitted by customers or insurance claims"
+    },
+    "/leads/{leadId}": {
+      "schema": { "$ref": "#/entities/LeadItem" },
+      "description": "Contractor lead marketplace items"
+    },
+    "/contractors/{contractorId}": {
+      "schema": { "$ref": "#/entities/ContractorProfile" },
+      "description": "Contractor account profiles and wallet balance"
+    }
+  }
+}

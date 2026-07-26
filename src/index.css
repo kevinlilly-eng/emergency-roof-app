@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .card-shadow {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  }
+  .emergency-glow {
+    box-shadow: 0 0 24px rgba(245, 158, 11, 0.22);
+  }
+}

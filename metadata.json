@@ -1,0 +1,6 @@
+{
+  "name": "Emergency Tarp & Roof Response Hub",
+  "description": "24/7 On-Demand Emergency Roof Tarping, Leak Inspection, GPS Site Locator, Storm Alert Center & Cost Estimator.",
+  "requestFramePermissions": ["camera", "geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
