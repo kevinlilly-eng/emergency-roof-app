@@ -169,7 +169,7 @@ export const WelcomeHero: React.FC<WelcomeHeroProps> = ({
                 Prefer to Speak with a Dispatch Officer?
               </div>
               <div className="text-lg font-extrabold text-white">
-                Toll-Free Emergency Hotline: 1-800-ROOF-SOS
+                Emergency Hotline: (706) 740-0529
               </div>
               <div className="text-xs text-slate-400">
                 Live dispatchers standing by 24 hours a day, 365 days a year.
@@ -178,10 +178,10 @@ export const WelcomeHero: React.FC<WelcomeHeroProps> = ({
           </div>
 
           <a
-            href="tel:18007663767"
+            href="tel:7067400529"
             className="w-full md:w-auto bg-amber-500 hover:bg-amber-400 text-slate-950 font-black px-6 py-3 rounded-xl text-center shadow-lg transition-all active:scale-95 whitespace-nowrap"
           >
-            CALL 1-800-766-3767
+            CALL (706) 740-0529
           </a>
         </div>
       </div>

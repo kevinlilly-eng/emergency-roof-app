@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, PhoneCall, AlertTriangle, Calculator, Truck, CloudLightning, Home, Briefcase, Download } from 'lucide-react';
+import { Shield, PhoneCall, AlertTriangle, Calculator, Truck, CloudLightning, Home, Briefcase, Share2 } from 'lucide-react';
 
 interface HeaderProps {
   activeTab: 'home' | 'emergency' | 'estimate' | 'tracker' | 'radar' | 'contractor';
@@ -7,6 +7,7 @@ interface HeaderProps {
   activeTicketCount: number;
   unclaimedLeadCount?: number;
   onEmergencyPress: () => void;
+  onSharePress: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -15,6 +16,7 @@ export const Header: React.FC<HeaderProps> = ({
   activeTicketCount,
   unclaimedLeadCount = 0,
   onEmergencyPress,
+  onSharePress,
 }) => {
   return (
     <header className="sticky top-0 z-40 bg-slate-900 border-b border-slate-800 text-white shadow-xl">
@@ -30,10 +32,10 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="hidden md:flex items-center gap-4 shrink-0 font-mono">
           <span>DISPATCH HOTLINE:</span>
           <a
-            href="tel:18007663767"
+            href="tel:7067400529"
             className="bg-slate-950 text-amber-400 px-2.5 py-0.5 rounded font-bold hover:bg-slate-900 transition-colors"
           >
-            1-800-ROOF-SOS (766-3767)
+            (706) 740-0529
           </a>
         </div>
       </div>
@@ -137,35 +139,15 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Right Action Button */}
           <div className="flex items-center gap-2 sm:gap-3">
-            <a
-              href="/emergency-tarp-roof-app.zip"
-              download="emergency-tarp-roof-app.zip"
-              onClick={async (e) => {
-                e.preventDefault();
-                try {
-                  const res = await fetch('/emergency-tarp-roof-app.zip');
-                  const arrayBuffer = await res.arrayBuffer();
-                  const blob = new Blob([arrayBuffer], { type: 'application/octet-stream' });
-                  const blobUrl = URL.createObjectURL(blob);
-                  const link = document.createElement('a');
-                  link.href = blobUrl;
-                  link.download = 'emergency-tarp-roof-app.zip';
-                  document.body.appendChild(link);
-                  link.click();
-                  setTimeout(() => {
-                    document.body.removeChild(link);
-                    URL.revokeObjectURL(blobUrl);
-                  }, 100);
-                } catch {
-                  window.open('/emergency-tarp-roof-app.zip', '_blank');
-                }
-              }}
-              title="Download full project source code as ZIP archive"
-              className="bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs px-3 py-2 rounded-xl border border-emerald-400/50 flex items-center gap-1.5 transition-all shadow-md shrink-0 cursor-pointer"
+            <button
+              onClick={onSharePress}
+              className="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-bold text-xs sm:text-sm px-3 py-2 rounded-xl flex items-center gap-1.5 transition-all active:scale-95 shadow-sm"
+              title="Share App via Text / SMS"
             >
-              <Download className="w-4 h-4 text-white" />
-              <span>Download ZIP (All Code)</span>
-            </a>
+              <Share2 className="w-4 h-4 text-amber-400" />
+              <span className="hidden sm:inline">Text App</span>
+              <span className="sm:hidden">Share</span>
+            </button>
 
             <button
               onClick={onEmergencyPress}
@@ -179,6 +161,12 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Mobile Sub-Navigation Bar */}
         <div className="flex md:hidden overflow-x-auto py-2 gap-2 border-t border-slate-800/80 scrollbar-none">
+          <button
+            onClick={onSharePress}
+            className="bg-amber-500/20 text-amber-300 border border-amber-500/40 px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap flex items-center gap-1.5 shrink-0"
+          >
+            <Share2 className="w-3.5 h-3.5" /> Text App
+          </button>
           <button
             onClick={() => setActiveTab('home')}
             className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap flex items-center gap-1.5 ${

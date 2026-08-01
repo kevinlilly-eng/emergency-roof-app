@@ -4,7 +4,6 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { Analytics } from '@vercel/analytics/react';
 import { collection, doc, onSnapshot, setDoc, updateDoc } from 'firebase/firestore';
 import { db, handleFirestoreError, OperationType } from './lib/firebase';
 import { Header } from './components/Header';
@@ -15,12 +14,14 @@ import { DispatchTracker } from './components/DispatchTracker';
 import { StormAlertCenter } from './components/StormAlertCenter';
 import { InsuranceReportModal } from './components/InsuranceReportModal';
 import { ContractorDashboard } from './components/ContractorDashboard';
+import { ShareModal } from './components/ShareModal';
 import { DispatchTicket, TicketStatus, EstimateRequest, LeadItem, ContractorProfile, PaymentTransaction } from './types';
 import { INITIAL_TICKETS, MOCK_INITIAL_LEADS, MOCK_CONTRACTOR_PROFILE } from './data/mockData';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<'home' | 'emergency' | 'estimate' | 'tracker' | 'radar' | 'contractor'>('home');
   const [isEmergencyModalOpen, setIsEmergencyModalOpen] = useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [selectedInsuranceTicket, setSelectedInsuranceTicket] = useState<DispatchTicket | null>(null);
 
   // Tickets state with localStorage and Firestore persistence
@@ -373,6 +374,7 @@ export default function App() {
         activeTicketCount={tickets.filter((t) => t.status !== 'COMPLETED').length}
         unclaimedLeadCount={leads.filter((l) => !l.isClaimed).length}
         onEmergencyPress={() => setIsEmergencyModalOpen(true)}
+        onSharePress={() => setIsShareModalOpen(true)}
       />
 
       {/* Main Content Area */}
@@ -430,6 +432,11 @@ export default function App() {
         onClose={() => setSelectedInsuranceTicket(null)}
       />
 
+      <ShareModal
+        isOpen={isShareModalOpen}
+        onClose={() => setIsShareModalOpen(false)}
+      />
+
       {/* Footer */}
       <footer className="bg-slate-900 border-t border-slate-800 text-slate-400 py-8 px-4 text-xs">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
@@ -438,14 +445,19 @@ export default function App() {
             <p className="text-slate-500">Licensed & Insured Master Roofing Contractors #CCC-1329014. Available 24/7/365.</p>
           </div>
 
-          <div className="flex items-center gap-4 text-slate-400 font-mono">
-            <span>24/7 DISPATCH: 1-800-ROOF-SOS</span>
+          <div className="flex flex-wrap items-center justify-center md:justify-end gap-4 text-slate-400 font-mono">
+            <button
+              onClick={() => setIsShareModalOpen(true)}
+              className="bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 px-3 py-1.5 rounded-lg text-xs font-bold font-sans transition-colors flex items-center gap-1.5"
+            >
+              📱 Text App to Someone
+            </button>
+            <span>24/7 DISPATCH: (706) 740-0529</span>
             <span>•</span>
             <span>AVG ARRIVAL: 24 MINS</span>
           </div>
         </div>
       </footer>
-      <Analytics />
     </div>
   );
 }

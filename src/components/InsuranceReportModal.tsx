@@ -256,7 +256,7 @@ export const InsuranceReportModal: React.FC<InsuranceReportModalProps> = ({ tick
           <div className="border-t border-slate-200 pt-6 flex justify-between items-end text-[10px] text-slate-500">
             <div>
               <div>Certified Technician: {ticket.assignedCrewUnit?.leadTechnician || 'Master Roofer #804'}</div>
-              <div>Dispatch Center: 1-800-ROOF-SOS</div>
+              <div>Dispatch Center: (706) 740-0529</div>
             </div>
 
             <div className="text-right font-mono">
