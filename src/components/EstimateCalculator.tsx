@@ -117,52 +117,107 @@ export const EstimateCalculator: React.FC<EstimateCalculatorProps> = ({ onEstima
           {/* Roof Service Type Selector */}
           <div>
             <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
-              Service Type
+              Select Specialty Service
             </label>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              <button
+                type="button"
+                onClick={() => { setServiceType('NEW_ROOF'); setMaterial('ASPHALT_SHINGLE'); }}
+                className={`p-2.5 rounded-xl border text-xs font-bold text-left transition-all ${
+                  serviceType === 'NEW_ROOF'
+                    ? 'bg-amber-500 text-slate-950 border-amber-500 shadow-sm'
+                    : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                }`}
+              >
+                🏠 New Roof Installation
+              </button>
+              <button
+                type="button"
+                onClick={() => { setServiceType('METAL_ROOF'); setMaterial('METAL_STANDING_SEAM'); }}
+                className={`p-2.5 rounded-xl border text-xs font-bold text-left transition-all ${
+                  serviceType === 'METAL_ROOF'
+                    ? 'bg-amber-500 text-slate-950 border-amber-500 shadow-sm'
+                    : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                }`}
+              >
+                ⚡ Metal Roof System
+              </button>
+              <button
+                type="button"
+                onClick={() => { setServiceType('LIFETIME_ROOF'); setMaterial('LIFETIME_SYSTEM'); }}
+                className={`p-2.5 rounded-xl border text-xs font-bold text-left transition-all ${
+                  serviceType === 'LIFETIME_ROOF'
+                    ? 'bg-amber-500 text-slate-950 border-amber-500 shadow-sm'
+                    : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                }`}
+              >
+                👑 Lifetime Roof System
+              </button>
+              <button
+                type="button"
+                onClick={() => { setServiceType('CHIMNEY_FLASHING'); }}
+                className={`p-2.5 rounded-xl border text-xs font-bold text-left transition-all ${
+                  serviceType === 'CHIMNEY_FLASHING'
+                    ? 'bg-amber-500 text-slate-950 border-amber-500 shadow-sm'
+                    : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                }`}
+              >
+                🧱 Chimney Flashing
+              </button>
+              <button
+                type="button"
+                onClick={() => { setServiceType('SKYLIGHT_REPAIR'); }}
+                className={`p-2.5 rounded-xl border text-xs font-bold text-left transition-all ${
+                  serviceType === 'SKYLIGHT_REPAIR'
+                    ? 'bg-amber-500 text-slate-950 border-amber-500 shadow-sm'
+                    : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                }`}
+              >
+                ☀️ Skylight Repair & Install
+              </button>
+              <button
+                type="button"
+                onClick={() => { setServiceType('TILE_ROOF'); setMaterial('CLAY_TILE'); }}
+                className={`p-2.5 rounded-xl border text-xs font-bold text-left transition-all ${
+                  serviceType === 'TILE_ROOF'
+                    ? 'bg-amber-500 text-slate-950 border-amber-500 shadow-sm'
+                    : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                }`}
+              >
+                🏛️ Tile Roofs (Clay/Concrete)
+              </button>
+              <button
+                type="button"
+                onClick={() => { setServiceType('RUBBER_EPDM'); setMaterial('RUBBER_EPDM'); }}
+                className={`p-2.5 rounded-xl border text-xs font-bold text-left transition-all ${
+                  serviceType === 'RUBBER_EPDM'
+                    ? 'bg-amber-500 text-slate-950 border-amber-500 shadow-sm'
+                    : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                }`}
+              >
+                🛡️ Rubber Roofs (EPDM)
+              </button>
               <button
                 type="button"
                 onClick={() => setServiceType('LEAK_REPAIR')}
-                className={`p-3 rounded-xl border text-xs font-bold text-left transition-all ${
+                className={`p-2.5 rounded-xl border text-xs font-bold text-left transition-all ${
                   serviceType === 'LEAK_REPAIR'
                     ? 'bg-amber-500 text-slate-950 border-amber-500 shadow-sm'
                     : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
                 }`}
               >
-                💧 Minor Leak & Patch Repair
+                💧 Leak & Patch Repair
               </button>
               <button
                 type="button"
                 onClick={() => setServiceType('FULL_REPLACEMENT')}
-                className={`p-3 rounded-xl border text-xs font-bold text-left transition-all ${
+                className={`p-2.5 rounded-xl border text-xs font-bold text-left transition-all ${
                   serviceType === 'FULL_REPLACEMENT'
                     ? 'bg-amber-500 text-slate-950 border-amber-500 shadow-sm'
                     : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
                 }`}
               >
-                🏠 Full Roof Replacement
-              </button>
-              <button
-                type="button"
-                onClick={() => setServiceType('INSPECTION')}
-                className={`p-3 rounded-xl border text-xs font-bold text-left transition-all ${
-                  serviceType === 'INSPECTION'
-                    ? 'bg-amber-500 text-slate-950 border-amber-500 shadow-sm'
-                    : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
-                }`}
-              >
-                📋 Routine Roof Audit
-              </button>
-              <button
-                type="button"
-                onClick={() => setServiceType('MAINTENANCE')}
-                className={`p-3 rounded-xl border text-xs font-bold text-left transition-all ${
-                  serviceType === 'MAINTENANCE'
-                    ? 'bg-amber-500 text-slate-950 border-amber-500 shadow-sm'
-                    : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
-                }`}
-              >
-                🔧 Preventative Flashing Seal
+                🏷️ Complete Replacement
               </button>
             </div>
           </div>

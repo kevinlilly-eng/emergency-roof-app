@@ -8,6 +8,7 @@ import { collection, doc, onSnapshot, setDoc, updateDoc } from 'firebase/firesto
 import { db, handleFirestoreError, OperationType } from './lib/firebase';
 import { Header } from './components/Header';
 import { WelcomeHero } from './components/WelcomeHero';
+import { ServicesShowcase } from './components/ServicesShowcase';
 import { EmergencyFlowModal } from './components/EmergencyFlowModal';
 import { EstimateCalculator } from './components/EstimateCalculator';
 import { DispatchTracker } from './components/DispatchTracker';
@@ -380,11 +381,17 @@ export default function App() {
       {/* Main Content Area */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {activeTab === 'home' && (
-          <WelcomeHero
-            onSelectStandardEstimate={() => setActiveTab('estimate')}
-            onSelectEmergencyDispatch={() => setIsEmergencyModalOpen(true)}
-            activeTicketCount={tickets.length}
-          />
+          <div className="space-y-12">
+            <WelcomeHero
+              onSelectStandardEstimate={() => setActiveTab('estimate')}
+              onSelectEmergencyDispatch={() => setIsEmergencyModalOpen(true)}
+              activeTicketCount={tickets.length}
+            />
+            <ServicesShowcase
+              onSelectService={() => setActiveTab('estimate')}
+              onCallHotline={() => { window.location.href = 'tel:7067400529'; }}
+            />
+          </div>
         )}
 
         {activeTab === 'estimate' && (

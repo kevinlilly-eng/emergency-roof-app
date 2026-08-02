@@ -25,10 +25,12 @@ export interface CalculationResult {
 
 const MATERIAL_MULTIPLIERS: Record<RoofMaterial, { name: string; basePerSqFt: number }> = {
   ASPHALT_SHINGLE: { name: 'Architectural Asphalt Shingle', basePerSqFt: 4.5 },
-  METAL_STANDING_SEAM: { name: 'Standing Seam Metal', basePerSqFt: 9.0 },
+  LIFETIME_SYSTEM: { name: 'Lifetime Warranty Roof System (GAF / CertainTeed)', basePerSqFt: 6.25 },
+  METAL_STANDING_SEAM: { name: 'Standing Seam / Structural Metal', basePerSqFt: 9.0 },
   CLAY_TILE: { name: 'Spanish Clay / Concrete Tile', basePerSqFt: 11.5 },
   SLATE: { name: 'Natural Slate / Composite', basePerSqFt: 14.0 },
-  FLAT_TPO: { name: 'Flat Commercial TPO / Membrane', basePerSqFt: 5.5 },
+  FLAT_TPO: { name: 'Flat Commercial TPO / Single-Ply', basePerSqFt: 5.5 },
+  RUBBER_EPDM: { name: 'Rubber Roofs (EPDM Waterproof Membrane)', basePerSqFt: 6.8 },
 };
 
 const PITCH_MULTIPLIERS: Record<RoofPitch, { name: string; multiplier: number }> = {

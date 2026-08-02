@@ -1,6 +1,6 @@
 export type EmergencySeverity = 'CRITICAL' | 'URGENT' | 'STANDARD';
 
-export type RoofMaterial = 'ASPHALT_SHINGLE' | 'METAL_STANDING_SEAM' | 'CLAY_TILE' | 'SLATE' | 'FLAT_TPO';
+export type RoofMaterial = 'ASPHALT_SHINGLE' | 'METAL_STANDING_SEAM' | 'CLAY_TILE' | 'SLATE' | 'FLAT_TPO' | 'RUBBER_EPDM' | 'LIFETIME_SYSTEM';
 
 export type RoofPitch = 'FLAT' | 'LOW_SLOPE' | 'MEDIUM_PITCH' | 'STEEP_PITCH' | 'HAZARDOUS_STEEP';
 
@@ -113,7 +113,18 @@ export interface EstimateRequest {
   phone: string;
   email: string;
   address: string;
-  serviceType: 'INSPECTION' | 'MAINTENANCE' | 'LEAK_REPAIR' | 'FULL_REPLACEMENT';
+  serviceType: 
+    | 'INSPECTION' 
+    | 'MAINTENANCE' 
+    | 'LEAK_REPAIR' 
+    | 'FULL_REPLACEMENT' 
+    | 'NEW_ROOF' 
+    | 'METAL_ROOF' 
+    | 'CHIMNEY_FLASHING' 
+    | 'SKYLIGHT_REPAIR' 
+    | 'TILE_ROOF' 
+    | 'RUBBER_EPDM' 
+    | 'LIFETIME_ROOF';
   roofMaterial: RoofMaterial;
   roofPitch: RoofPitch;
   stories: number;
