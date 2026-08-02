@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" prefix="og: http://ogp.me/ns#">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,10 +17,14 @@
 
     <!-- Open Graph / Facebook / WhatsApp / iMessage / LinkedIn -->
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="Emergency Roof Tarping & Repair Response Hub" />
     <meta property="og:title" content="Emergency Roof Tarping & Repair Hotline: (706) 740-0529" />
     <meta property="og:description" content="24/7 Rapid Emergency Roof Tarping & Leak Seal Dispatch. Average arrival in 24 mins. Call (706) 740-0529 or request instant dispatch online." />
+    <meta property="og:url" content="https://a-newroof.com/" />
     <meta property="og:image" content="https://a-newroof.com/og-image.jpg" />
+    <meta property="og:image:secure_url" content="https://a-newroof.com/og-image.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="24/7 Emergency Roof Tarping & Leak Repair Hotline (706) 740-0529" />
@@ -31,31 +35,6 @@
     <meta name="twitter:description" content="24/7 Rapid Emergency Roof Tarping & Storm Leak Seal Dispatch. Call (706) 740-0529 for instant crew dispatch." />
     <meta name="twitter:image" content="https://a-newroof.com/og-image.jpg" />
     <meta name="twitter:image:alt" content="24/7 Emergency Roof Tarping & Leak Repair Hotline (706) 740-0529" />
-
-    <!-- Dynamic Domain Script for Social Preview Generation -->
-    <script>
-      (function() {
-        try {
-          var origin = window.location.origin;
-          var href = window.location.href;
-          var imageUrl = origin + '/og-image.jpg';
-          
-          var ogImg = document.querySelector('meta[property="og:image"]');
-          if (ogImg) ogImg.setAttribute('content', imageUrl);
-          
-          var twImg = document.querySelector('meta[name="twitter:image"]');
-          if (twImg) twImg.setAttribute('content', imageUrl);
-          
-          var ogUrl = document.querySelector('meta[property="og:url"]');
-          if (!ogUrl) {
-            ogUrl = document.createElement('meta');
-            ogUrl.setAttribute('property', 'og:url');
-            document.head.appendChild(ogUrl);
-          }
-          ogUrl.setAttribute('content', href);
-        } catch (e) {}
-      })();
-    </script>
 
     <!-- Mobile App Capabilities -->
     <meta name="mobile-web-app-capable" content="yes" />
