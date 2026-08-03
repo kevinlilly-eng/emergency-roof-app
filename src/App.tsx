@@ -20,6 +20,31 @@ import { DispatchTicket, TicketStatus, EstimateRequest, LeadItem, ContractorProf
 import { INITIAL_TICKETS, MOCK_INITIAL_LEADS, MOCK_CONTRACTOR_PROFILE } from './data/mockData';
 
 export default function App() {
+  // Handle direct sitemap.xml URL access in browser
+  if (typeof window !== 'undefined' && (window.location.pathname === '/sitemap.xml' || window.location.pathname.endsWith('/sitemap.xml'))) {
+    const xmlContent = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://a-newroof.com/</loc>
+    <lastmod>2026-08-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>`;
+
+    return (
+      <div style={{ backgroundColor: '#0f172a', color: '#38bdf8', minHeight: '100vh', padding: '24px', fontFamily: 'monospace', fontSize: '14px', lineHeight: '1.5' }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+          <h2 style={{ color: '#f8fafc', marginBottom: '8px', fontSize: '18px', fontWeight: 'bold' }}>XML Sitemap: https://a-newroof.com/sitemap.xml</h2>
+          <p style={{ color: '#94a3b8', marginBottom: '16px', fontSize: '13px' }}>This page contains the index of search engine crawlable pages for Google, Bing, and search indexing bots.</p>
+          <pre style={{ backgroundColor: '#1e293b', color: '#38bdf8', padding: '20px', borderRadius: '8px', overflowX: 'auto', border: '1px solid #334155' }}>
+            {xmlContent}
+          </pre>
+        </div>
+      </div>
+    );
+  }
+
   const [activeTab, setActiveTab] = useState<'home' | 'emergency' | 'estimate' | 'tracker' | 'radar' | 'contractor'>('home');
   const [isEmergencyModalOpen, setIsEmergencyModalOpen] = useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
