@@ -20,6 +20,65 @@ import { DispatchTicket, TicketStatus, EstimateRequest, LeadItem, ContractorProf
 import { INITIAL_TICKETS, MOCK_INITIAL_LEADS, MOCK_CONTRACTOR_PROFILE } from './data/mockData';
 
 export default function App() {
+  // Handle direct sitemap.xml and robots.txt URL access in browser / SPA router
+  const currentPath = typeof window !== 'undefined' ? window.location.pathname.toLowerCase() : '';
+
+  if (currentPath === '/sitemap.xml' || currentPath.endsWith('/sitemap.xml')) {
+    const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://a-newroof.com/</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>`;
+
+    return (
+      <div className="min-h-screen bg-slate-950 text-slate-100 p-6 font-mono text-sm leading-relaxed select-text">
+        <div className="max-w-4xl mx-auto space-y-4">
+          <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+            <div>
+              <h1 className="text-lg font-bold text-sky-400">XML Sitemap: https://a-newroof.com/sitemap.xml</h1>
+              <p className="text-xs text-slate-400">Official search engine index for Google Search Console, Bing Webmaster, and indexing bots.</p>
+            </div>
+            <a href="/" className="px-3 py-1.5 text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-md transition-colors">
+              Return to App &rarr;
+            </a>
+          </div>
+          <pre className="p-4 bg-slate-900 text-sky-300 rounded-lg border border-slate-800 overflow-x-auto text-xs sm:text-sm font-mono whitespace-pre">
+            {sitemapXml}
+          </pre>
+        </div>
+      </div>
+    );
+  }
+
+  if (currentPath === '/robots.txt' || currentPath.endsWith('/robots.txt')) {
+    const robotsTxt = `User-agent: *
+Allow: /
+Sitemap: https://a-newroof.com/sitemap.xml`;
+
+    return (
+      <div className="min-h-screen bg-slate-950 text-slate-100 p-6 font-mono text-sm leading-relaxed select-text">
+        <div className="max-w-4xl mx-auto space-y-4">
+          <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+            <div>
+              <h1 className="text-lg font-bold text-emerald-400">Robots.txt: https://a-newroof.com/robots.txt</h1>
+              <p className="text-xs text-slate-400">Search crawler directives for a-newroof.com.</p>
+            </div>
+            <a href="/" className="px-3 py-1.5 text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-md transition-colors">
+              Return to App &rarr;
+            </a>
+          </div>
+          <pre className="p-4 bg-slate-900 text-emerald-300 rounded-lg border border-slate-800 overflow-x-auto text-xs sm:text-sm font-mono whitespace-pre">
+            {robotsTxt}
+          </pre>
+        </div>
+      </div>
+    );
+  }
+
   const [activeTab, setActiveTab] = useState<'home' | 'emergency' | 'estimate' | 'tracker' | 'radar' | 'contractor'>('home');
   const [isEmergencyModalOpen, setIsEmergencyModalOpen] = useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
