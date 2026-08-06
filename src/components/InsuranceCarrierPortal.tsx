@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import tarpImg from '../assets/images/emergency_roof_tarp_1786018839293.jpg';
+import damageImg from '../assets/images/roof_damage_inspection_1786018855423.jpg';
+import waterDamageImg from '../assets/images/water_damage_ceiling_1786018870888.jpg';
 import { 
   ShieldCheck, 
   TrendingDown, 
@@ -161,7 +164,7 @@ export const InsuranceCarrierPortal: React.FC = () => {
           <div className="space-y-4">
             <div className="relative rounded-2xl overflow-hidden shadow-lg border border-slate-200 group">
               <img 
-                src="https://images.unsplash.com/photo-1628744876497-eb30460be9f6?auto=format&fit=crop&w=800&q=80" 
+                src={tarpImg} 
                 alt="Emergency Tarping in Progress" 
                 className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
                 referrerPolicy="no-referrer"
@@ -176,7 +179,7 @@ export const InsuranceCarrierPortal: React.FC = () => {
 
             <div className="relative rounded-2xl overflow-hidden shadow-lg border border-slate-200 group">
               <img 
-                src="https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=800&q=80" 
+                src={damageImg} 
                 alt="Storm Roof Damage Photo Audit" 
                 className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500"
                 referrerPolicy="no-referrer"
@@ -193,7 +196,7 @@ export const InsuranceCarrierPortal: React.FC = () => {
           <div className="space-y-4 pt-6">
             <div className="relative rounded-2xl overflow-hidden shadow-lg border border-slate-200 group">
               <img 
-                src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80" 
+                src={waterDamageImg} 
                 alt="Prevent Ceiling Mold & Water Damage" 
                 className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500"
                 referrerPolicy="no-referrer"

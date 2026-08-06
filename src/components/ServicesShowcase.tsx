@@ -1,4 +1,10 @@
 import React from 'react';
+import shingleImg from '../assets/images/shingle_roof_install_1786018885196.jpg';
+import metalImg from '../assets/images/metal_standing_seam_1786018903761.jpg';
+import chimneyImg from '../assets/images/chimney_flashing_brick_1786018923230.jpg';
+import skylightImg from '../assets/images/skylight_roof_window_1786018938763.jpg';
+import tileImg from '../assets/images/spanish_clay_tile_1786018955539.jpg';
+import rubberImg from '../assets/images/rubber_epdm_flat_1786018968617.jpg';
 import { 
   Home, 
   Zap, 
@@ -41,7 +47,7 @@ export const SERVICES_LIST: RoofingServiceItem[] = [
     icon: <Home className="w-6 h-6 text-blue-600" />,
     badge: 'Popular Choice',
     badgeColor: 'bg-blue-100 text-blue-800 border-blue-200',
-    imageUrl: 'https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=800&q=80',
+    imageUrl: shingleImg,
     description: 'Complete tear-off and precision installation of brand-new roof systems using premium underlayment, ridge ventilation, and ice/water shields.',
     keyFeatures: [
       'Architectural 30-Yr & 50-Yr Shingles',
@@ -57,7 +63,7 @@ export const SERVICES_LIST: RoofingServiceItem[] = [
     icon: <Zap className="w-6 h-6 text-amber-600" />,
     badge: 'Storm & Wind Rated',
     badgeColor: 'bg-amber-100 text-amber-800 border-amber-200',
-    imageUrl: 'https://images.unsplash.com/photo-1628744876497-eb30460be9f6?auto=format&fit=crop&w=800&q=80',
+    imageUrl: metalImg,
     description: 'Ultra-durable concealed fastener standing seam and ribbed metal roofing engineered to withstand 140+ mph hurricane winds, hail, and extreme heat.',
     keyFeatures: [
       'Concealed Fastener Standing Seam Panels',
@@ -73,7 +79,7 @@ export const SERVICES_LIST: RoofingServiceItem[] = [
     icon: <Flame className="w-6 h-6 text-red-600" />,
     badge: 'Leak Prevention',
     badgeColor: 'bg-red-100 text-red-800 border-red-200',
-    imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80',
+    imageUrl: chimneyImg,
     description: 'Custom-bent copper, lead, or galvanized chimney counter-flashing, step flashing, and cricket diverters to eliminate chronic water leaks around masonry chimneys.',
     keyFeatures: [
       'Custom Step & Counter-Flashing Fabrication',
@@ -89,7 +95,7 @@ export const SERVICES_LIST: RoofingServiceItem[] = [
     icon: <Sun className="w-6 h-6 text-amber-500" />,
     badge: 'Energy Efficient',
     badgeColor: 'bg-amber-100 text-amber-800 border-amber-200',
-    imageUrl: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
+    imageUrl: skylightImg,
     description: 'Fix leaking skylight gaskets, replace clouded glass domes, or install energy-efficient VELUX double-pane venting skylights with custom flashing kits.',
     keyFeatures: [
       'No-Leak Flashing & Perimeter Seal Kits',
@@ -105,7 +111,7 @@ export const SERVICES_LIST: RoofingServiceItem[] = [
     icon: <Grid className="w-6 h-6 text-orange-600" />,
     badge: 'Luxury Architectural',
     badgeColor: 'bg-orange-100 text-orange-800 border-orange-200',
-    imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+    imageUrl: tileImg,
     description: 'Expert repair, re-sealing, broken tile replacement, and underlayment (lift & relay) for Spanish clay tiles, concrete barrel tiles, and slate roofs.',
     keyFeatures: [
       'Underlayment Felt & Polymer Membrane Lift-and-Relay',
@@ -121,7 +127,7 @@ export const SERVICES_LIST: RoofingServiceItem[] = [
     icon: <ShieldCheck className="w-6 h-6 text-emerald-600" />,
     badge: '100% Waterproof',
     badgeColor: 'bg-emerald-100 text-emerald-800 border-emerald-200',
-    imageUrl: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80',
+    imageUrl: rubberImg,
     description: 'Seamless rubber EPDM and single-ply TPO waterproof membranes specifically designed for flat roofs, residential additions, garages, and commercial decks.',
     keyFeatures: [
       'Seamless Single-Ply EPDM Membrane Application',
@@ -137,7 +143,7 @@ export const SERVICES_LIST: RoofingServiceItem[] = [
     icon: <Crown className="w-6 h-6 text-purple-600" />,
     badge: '50-Year Warranty',
     badgeColor: 'bg-purple-100 text-purple-800 border-purple-200',
-    imageUrl: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80',
+    imageUrl: shingleImg,
     description: 'Top-tier total protection roofing systems featuring heavy HD architectural shingles, starter strips, ridge cap shingles, and lifetime non-prorated material protection.',
     keyFeatures: [
       'GAF Timberline HDZ / CertainTeed Landmark Systems',
