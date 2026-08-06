@@ -48,23 +48,7 @@
   ],
   "rewrites": [
     {
-      "source": "/sitemap.xml",
-      "destination": "/sitemap.xml"
-    },
-    {
-      "source": "/robots.txt",
-      "destination": "/robots.txt"
-    },
-    {
-      "source": "/BingSiteAuth.xml",
-      "destination": "/BingSiteAuth.xml"
-    },
-    {
-      "source": "/00602699e4b74f38b18b1b1c89c16e86.txt",
-      "destination": "/00602699e4b74f38b18b1b1c89c16e86.txt"
-    },
-    {
-      "source": "/((?!api/|sitemap\\.xml|robots\\.txt|BingSiteAuth\\.xml|00602699e4b74f38b18b1b1c89c16e86\\.txt|.*\\.[a-zA-Z0-9]+$).*)",
+      "source": "/((?!sitemap\\.xml|robots\\.txt|BingSiteAuth\\.xml|00602699e4b74f38b18b1b1c89c16e86\\.txt|.*\\.[a-zA-Z0-9]+$).*)",
       "destination": "/index.html"
     }
   ]
