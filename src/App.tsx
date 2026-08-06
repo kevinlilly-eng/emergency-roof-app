@@ -8,6 +8,7 @@ import { collection, doc, onSnapshot, setDoc, updateDoc } from 'firebase/firesto
 import { db, handleFirestoreError, OperationType } from './lib/firebase';
 import { Header } from './components/Header';
 import { WelcomeHero } from './components/WelcomeHero';
+import { InsuranceCarrierPortal } from './components/InsuranceCarrierPortal';
 import { ServicesShowcase } from './components/ServicesShowcase';
 import { EmergencyFlowModal } from './components/EmergencyFlowModal';
 import { EstimateCalculator } from './components/EstimateCalculator';
@@ -79,7 +80,7 @@ Sitemap: https://a-newroof.com/sitemap.xml`;
     );
   }
 
-  const [activeTab, setActiveTab] = useState<'home' | 'emergency' | 'estimate' | 'tracker' | 'radar' | 'contractor'>('home');
+  const [activeTab, setActiveTab] = useState<'home' | 'insurance' | 'emergency' | 'estimate' | 'tracker' | 'radar' | 'contractor'>('home');
   const [isEmergencyModalOpen, setIsEmergencyModalOpen] = useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [selectedInsuranceTicket, setSelectedInsuranceTicket] = useState<DispatchTicket | null>(null);
@@ -451,6 +452,10 @@ Sitemap: https://a-newroof.com/sitemap.xml`;
               onCallHotline={() => { window.location.href = 'tel:7067400529'; }}
             />
           </div>
+        )}
+
+        {activeTab === 'insurance' && (
+          <InsuranceCarrierPortal />
         )}
 
         {activeTab === 'estimate' && (

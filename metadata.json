@@ -1,6 +1,6 @@
 {
-  "name": "Emergency Tarp & Roof Response Hub",
-  "description": "24/7 On-Demand Emergency Roof Tarping, Leak Inspection, GPS Site Locator, Storm Alert Center & Cost Estimator.",
+  "name": "A-NewRoof Emergency Response Platform",
+  "description": "B2B2C Emergency Loss Mitigation & Contractor Dispatch Platform. Free emergency tarping & damage audit app for homeowners insurance carriers, paired with a paid roofing contractor marketplace.",
   "requestFramePermissions": ["camera", "geolocation"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

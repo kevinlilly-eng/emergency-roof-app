@@ -27,33 +27,66 @@ export const WelcomeHero: React.FC<WelcomeHeroProps> = ({
   return (
     <div className="space-y-8 pb-12">
       {/* Brand Hero Header */}
-      <div className="text-center space-y-3 pt-4 sm:pt-6">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-600 border border-amber-500/20 text-xs font-bold uppercase tracking-wider">
-          <Zap className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
-          On-Demand Roofing & Emergency Protection
+      <div className="text-center space-y-4 pt-4 sm:pt-6 max-w-4xl mx-auto">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 text-blue-700 border border-blue-500/20 text-xs font-extrabold uppercase tracking-wider">
+          <ShieldCheck className="w-4 h-4 text-blue-600" />
+          Insurance Loss Mitigation & Rapid Response Platform
         </div>
         
-        <h1 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
-          Roof Response Hub
+        <h1 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+          A-NewRoof Emergency Response Platform
         </h1>
         
-        <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto font-medium">
-          Fast, licensed emergency roof tarping & certified leak patching. Protect your property from structural rain damage in under 30 minutes.
+        <p className="text-base sm:text-lg text-slate-600 max-w-3xl mx-auto font-medium leading-relaxed">
+          The free emergency tarping & damage reporting app that Homeowners Insurance Companies provide to insured policyholders to stop costly water damage, paired with a paid dispatch marketplace for licensed roofing contractors.
         </p>
 
+        {/* 3 Ecosystem Users Callout Cards */}
+        <div className="grid sm:grid-cols-3 gap-3 pt-3 text-left">
+          <div className="bg-white p-3.5 rounded-2xl border border-slate-200 card-shadow flex items-start gap-3">
+            <div className="w-8 h-8 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center shrink-0 text-base font-bold">
+              🏡
+            </div>
+            <div>
+              <div className="text-xs font-black text-slate-900">For Insured Homeowners</div>
+              <p className="text-[11px] text-slate-500 leading-snug">100% Free emergency tarp app provided via home insurance.</p>
+            </div>
+          </div>
+
+          <div className="bg-white p-3.5 rounded-2xl border border-slate-200 card-shadow flex items-start gap-3">
+            <div className="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 text-base font-bold">
+              🛡️
+            </div>
+            <div>
+              <div className="text-xs font-black text-slate-900">For Insurance Carriers</div>
+              <p className="text-[11px] text-slate-500 leading-snug">Stops $15,000+ water/mold claims with instant FNOL photo audit.</p>
+            </div>
+          </div>
+
+          <div className="bg-white p-3.5 rounded-2xl border border-slate-200 card-shadow flex items-start gap-3">
+            <div className="w-8 h-8 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 text-base font-bold">
+              🔨
+            </div>
+            <div>
+              <div className="text-xs font-black text-slate-900">For Roofing Companies</div>
+              <p className="text-[11px] text-slate-500 leading-snug">Marketplace to buy/claim high-intent tarping & replacement leads.</p>
+            </div>
+          </div>
+        </div>
+
         {/* Live Status Pill Bar */}
-        <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-semibold text-slate-600 pt-2">
+        <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-semibold text-slate-600 pt-1">
           <span className="flex items-center gap-1.5 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">
             <Clock className="w-3.5 h-3.5 text-amber-600" />
-            24 Min Avg Arrival Time
+            24 Min Avg Tarp Crew Arrival
           </span>
           <span className="flex items-center gap-1.5 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-            100% Insurance Pre-Approved
+            Zero Friction Policyholder App
           </span>
           <span className="flex items-center gap-1.5 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">
             <MapPin className="w-3.5 h-3.5 text-blue-600" />
-            GPS Rapid Fleet Tracking
+            GPS Geotagged Adjuster Audit
           </span>
         </div>
       </div>

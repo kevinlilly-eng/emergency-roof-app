@@ -27,6 +27,7 @@ export interface RoofingServiceItem {
   icon: React.ReactNode;
   badge: string;
   badgeColor: string;
+  imageUrl: string;
   description: string;
   keyFeatures: string[];
   warrantyText: string;
@@ -40,6 +41,7 @@ export const SERVICES_LIST: RoofingServiceItem[] = [
     icon: <Home className="w-6 h-6 text-blue-600" />,
     badge: 'Popular Choice',
     badgeColor: 'bg-blue-100 text-blue-800 border-blue-200',
+    imageUrl: 'https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=800&q=80',
     description: 'Complete tear-off and precision installation of brand-new roof systems using premium underlayment, ridge ventilation, and ice/water shields.',
     keyFeatures: [
       'Architectural 30-Yr & 50-Yr Shingles',
@@ -55,6 +57,7 @@ export const SERVICES_LIST: RoofingServiceItem[] = [
     icon: <Zap className="w-6 h-6 text-amber-600" />,
     badge: 'Storm & Wind Rated',
     badgeColor: 'bg-amber-100 text-amber-800 border-amber-200',
+    imageUrl: 'https://images.unsplash.com/photo-1628744876497-eb30460be9f6?auto=format&fit=crop&w=800&q=80',
     description: 'Ultra-durable concealed fastener standing seam and ribbed metal roofing engineered to withstand 140+ mph hurricane winds, hail, and extreme heat.',
     keyFeatures: [
       'Concealed Fastener Standing Seam Panels',
@@ -70,6 +73,7 @@ export const SERVICES_LIST: RoofingServiceItem[] = [
     icon: <Flame className="w-6 h-6 text-red-600" />,
     badge: 'Leak Prevention',
     badgeColor: 'bg-red-100 text-red-800 border-red-200',
+    imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80',
     description: 'Custom-bent copper, lead, or galvanized chimney counter-flashing, step flashing, and cricket diverters to eliminate chronic water leaks around masonry chimneys.',
     keyFeatures: [
       'Custom Step & Counter-Flashing Fabrication',
@@ -85,6 +89,7 @@ export const SERVICES_LIST: RoofingServiceItem[] = [
     icon: <Sun className="w-6 h-6 text-amber-500" />,
     badge: 'Energy Efficient',
     badgeColor: 'bg-amber-100 text-amber-800 border-amber-200',
+    imageUrl: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
     description: 'Fix leaking skylight gaskets, replace clouded glass domes, or install energy-efficient VELUX double-pane venting skylights with custom flashing kits.',
     keyFeatures: [
       'No-Leak Flashing & Perimeter Seal Kits',
@@ -100,6 +105,7 @@ export const SERVICES_LIST: RoofingServiceItem[] = [
     icon: <Grid className="w-6 h-6 text-orange-600" />,
     badge: 'Luxury Architectural',
     badgeColor: 'bg-orange-100 text-orange-800 border-orange-200',
+    imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
     description: 'Expert repair, re-sealing, broken tile replacement, and underlayment (lift & relay) for Spanish clay tiles, concrete barrel tiles, and slate roofs.',
     keyFeatures: [
       'Underlayment Felt & Polymer Membrane Lift-and-Relay',
@@ -115,6 +121,7 @@ export const SERVICES_LIST: RoofingServiceItem[] = [
     icon: <ShieldCheck className="w-6 h-6 text-emerald-600" />,
     badge: '100% Waterproof',
     badgeColor: 'bg-emerald-100 text-emerald-800 border-emerald-200',
+    imageUrl: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80',
     description: 'Seamless rubber EPDM and single-ply TPO waterproof membranes specifically designed for flat roofs, residential additions, garages, and commercial decks.',
     keyFeatures: [
       'Seamless Single-Ply EPDM Membrane Application',
@@ -130,6 +137,7 @@ export const SERVICES_LIST: RoofingServiceItem[] = [
     icon: <Crown className="w-6 h-6 text-purple-600" />,
     badge: '50-Year Warranty',
     badgeColor: 'bg-purple-100 text-purple-800 border-purple-200',
+    imageUrl: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80',
     description: 'Top-tier total protection roofing systems featuring heavy HD architectural shingles, starter strips, ridge cap shingles, and lifetime non-prorated material protection.',
     keyFeatures: [
       'GAF Timberline HDZ / CertainTeed Landmark Systems',
@@ -167,44 +175,53 @@ export const ServicesShowcase: React.FC<ServicesShowcaseProps> = ({
         {SERVICES_LIST.map((service) => (
           <div
             key={service.id}
-            className="bg-white rounded-2xl border border-slate-200 card-shadow p-6 flex flex-col justify-between hover:border-amber-500 hover:shadow-xl transition-all duration-300 group"
+            className="bg-white rounded-2xl border border-slate-200 card-shadow overflow-hidden flex flex-col justify-between hover:border-amber-500 hover:shadow-xl transition-all duration-300 group"
           >
-            <div className="space-y-4">
-              {/* Top Row: Icon & Badge */}
-              <div className="flex items-start justify-between gap-3">
-                <div className="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                  {service.icon}
-                </div>
-                <span className={`text-[11px] font-extrabold px-2.5 py-1 rounded-full border ${service.badgeColor}`}>
+            {/* Service Photo Card Header */}
+            <div className="relative h-36 overflow-hidden">
+              <img 
+                src={service.imageUrl} 
+                alt={service.title} 
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent p-3 flex items-end justify-between">
+                <span className={`text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border shadow-sm ${service.badgeColor}`}>
                   {service.badge}
                 </span>
-              </div>
-
-              {/* Title & Category */}
-              <div>
-                <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-                  {service.categoryTag}
+                <div className="w-9 h-9 rounded-xl bg-white/90 backdrop-blur text-slate-900 flex items-center justify-center shrink-0 shadow">
+                  {service.icon}
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 group-hover:text-amber-600 transition-colors">
-                  {service.title}
-                </h3>
               </div>
-
-              {/* Description */}
-              <p className="text-xs text-slate-600 leading-relaxed font-medium">
-                {service.description}
-              </p>
-
-              {/* Bullet Features */}
-              <ul className="space-y-1.5 pt-2 border-t border-slate-100 text-xs text-slate-700 font-medium">
-                {service.keyFeatures.map((feature, idx) => (
-                  <li key={idx} className="flex items-start gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
+
+            <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+              <div className="space-y-3">
+                {/* Title & Category */}
+                <div>
+                  <div className="text-[10px] font-extrabold text-amber-600 uppercase tracking-wider">
+                    {service.categoryTag}
+                  </div>
+                  <h3 className="text-base font-bold text-slate-900 group-hover:text-amber-600 transition-colors">
+                    {service.title}
+                  </h3>
+                </div>
+
+                {/* Description */}
+                <p className="text-xs text-slate-600 leading-relaxed font-medium">
+                  {service.description}
+                </p>
+
+                {/* Bullet Features */}
+                <ul className="space-y-1.5 pt-2 border-t border-slate-100 text-xs text-slate-700 font-medium">
+                  {service.keyFeatures.map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
             {/* Bottom Actions & Warranty */}
             <div className="pt-5 mt-4 border-t border-slate-100 space-y-3">
@@ -232,7 +249,8 @@ export const ServicesShowcase: React.FC<ServicesShowcaseProps> = ({
               </div>
             </div>
           </div>
-        ))}
+        </div>
+      ))}
 
         {/* 8th CTA Card: Live Dispatch or Custom Service Request */}
         <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 text-white rounded-2xl p-6 flex flex-col justify-between border border-slate-800 shadow-xl space-y-4">

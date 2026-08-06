@@ -2,8 +2,8 @@ import React from 'react';
 import { Shield, PhoneCall, AlertTriangle, Calculator, Truck, CloudLightning, Home, Briefcase, Share2 } from 'lucide-react';
 
 interface HeaderProps {
-  activeTab: 'home' | 'emergency' | 'estimate' | 'tracker' | 'radar' | 'contractor';
-  setActiveTab: (tab: 'home' | 'emergency' | 'estimate' | 'tracker' | 'radar' | 'contractor') => void;
+  activeTab: 'home' | 'insurance' | 'emergency' | 'estimate' | 'tracker' | 'radar' | 'contractor';
+  setActiveTab: (tab: 'home' | 'insurance' | 'emergency' | 'estimate' | 'tracker' | 'radar' | 'contractor') => void;
   activeTicketCount: number;
   unclaimedLeadCount?: number;
   onEmergencyPress: () => void;
@@ -79,6 +79,18 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
 
             <button
+              onClick={() => setActiveTab('insurance')}
+              className={`px-3 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition-all ${
+                activeTab === 'insurance'
+                  ? 'bg-blue-600 text-white border border-blue-400 shadow-md'
+                  : 'text-blue-300 hover:text-white hover:bg-slate-800/50'
+              }`}
+            >
+              <Shield className="w-4 h-4 text-blue-400" />
+              Insurance Partners
+            </button>
+
+            <button
               onClick={() => setActiveTab('estimate')}
               className={`px-3 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 transition-all ${
                 activeTab === 'estimate'
@@ -99,7 +111,7 @@ export const Header: React.FC<HeaderProps> = ({
               }`}
             >
               <Truck className="w-4 h-4" />
-              Live Fleet & Tickets
+              Fleet & Tickets
               {activeTicketCount > 0 && (
                 <span className="bg-amber-500 text-slate-950 font-black text-xs px-1.5 py-0.2 rounded-full">
                   {activeTicketCount}
@@ -174,6 +186,14 @@ export const Header: React.FC<HeaderProps> = ({
             }`}
           >
             <Home className="w-3.5 h-3.5" /> Overview
+          </button>
+          <button
+            onClick={() => setActiveTab('insurance')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap flex items-center gap-1.5 ${
+              activeTab === 'insurance' ? 'bg-blue-600 text-white font-bold' : 'bg-blue-900/50 text-blue-300 border border-blue-700/50'
+            }`}
+          >
+            <Shield className="w-3.5 h-3.5" /> Insurers
           </button>
           <button
             onClick={onEmergencyPress}
