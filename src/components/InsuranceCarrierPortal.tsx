@@ -140,7 +140,7 @@ export const InsuranceCarrierPortal: React.FC = () => {
               <div>
                 <div className="font-bold text-slate-900 text-sm">1-Tap Emergency Dispatch & Photo Intake</div>
                 <p className="text-xs text-slate-500">
-                  During hail/wind storms, the policyholder opens the app, uploads roof photos, and dispatches nearest rapid-tarp unit in ~24 mins.
+                  During hail/wind storms, the policyholder opens the app, uploads roof photos, and dispatches nearest rapid-tarp unit in under 1 hour.
                 </p>
               </div>
             </div>

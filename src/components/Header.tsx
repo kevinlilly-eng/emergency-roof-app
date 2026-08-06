@@ -52,14 +52,15 @@ export const Header: React.FC<HeaderProps> = ({
               <Shield className="w-6 h-6 stroke-[2.5]" />
             </div>
             <div>
-              <div className="text-lg font-bold tracking-tight text-white flex items-center gap-2">
-                Roof Response Hub
-                <span className="bg-amber-500/10 text-amber-400 text-[10px] uppercase tracking-wider font-extrabold px-1.5 py-0.5 rounded border border-amber-500/20">
+              <div className="text-lg sm:text-xl font-black tracking-tight text-white flex items-center gap-2">
+                A-NewRoof Response Hub
+                <span className="bg-amber-500 text-slate-950 text-[10px] uppercase tracking-wider font-black px-1.5 py-0.5 rounded shadow-sm">
                   PRO
                 </span>
               </div>
-              <div className="text-xs text-slate-400 font-medium hidden sm:block">
-                Emergency Tarping & Patching
+              <div className="text-xs font-black text-amber-400 tracking-wide uppercase flex items-center gap-1.5 mt-0.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                Emergency Tarping & Leak Patching
               </div>
             </div>
           </button>
