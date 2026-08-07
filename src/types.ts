@@ -144,3 +144,88 @@ export interface StormAlert {
   recommendedAction: string;
   issuedAt: string;
 }
+
+export interface RooferCustomRates {
+  asphaltShinglePerSq: number;
+  metalStandingSeamPerSq: number;
+  clayTilePerSq: number;
+  flatTpoPerSq: number;
+  emergencyTarpPerSqFt: number;
+  underlaymentPerSqFt: number;
+  iceAndWaterShieldPerSqFt: number;
+  dripEdgePerLf: number;
+  ridgeCapPerLf: number;
+  pipeBootPerEa: number;
+  steepPitchSurchargePercent: number;
+  twoStorySurchargePercent: number;
+  debrisRemovalFee: number;
+  laborHourlyRate: number;
+  overheadAndProfitPercent: number;
+  salesTaxPercent: number;
+}
+
+export interface GeminiEstimateLineItem {
+  category: string;
+  item: string;
+  quantity: number;
+  unit: string;
+  unitRate: number;
+  totalPrice: number;
+  codeRef?: string;
+}
+
+export interface GeminiEstimateResponse {
+  summary: string;
+  wasteFactorPercentage: number;
+  lineItems: GeminiEstimateLineItem[];
+  subtotal: number;
+  overheadAndProfitRate: number;
+  overheadAndProfitAmount: number;
+  estimatedTax: number;
+  grandTotal: number;
+  geminiSuggestionsAndThoughts: string[];
+  carrierDefenseNotes: string;
+}
+
+export interface GeminiSupplementLineItem {
+  xactimateCode: string;
+  description: string;
+  quantity: string;
+  unitPrice: number;
+  supplementTotal: number;
+  codeJustification: string;
+}
+
+export interface GeminiSupplementResponse {
+  reportTitle: string;
+  policyholder: string;
+  claimNumber: string;
+  carrier: string;
+  lossDate: string;
+  executiveSummary: string;
+  supplementLineItems: GeminiSupplementLineItem[];
+  totalSupplementAmount: number;
+  buildingCodeCitations: {
+    codeRef: string;
+    title: string;
+    requirementText: string;
+  }[];
+  adjusterRebuttalPoints: string[];
+  formalConclusion: string;
+}
+
+export interface GeminiTriageResponse {
+  severityScore: number;
+  urgencyCategory: 'CRITICAL' | 'URGENT' | 'STANDARD';
+  hazardAssessment: string;
+  recommendedEquipment: string[];
+  homeownerInterimAdvice: string[];
+  contractorPrioritization: {
+    contractorId: string;
+    companyName: string;
+    suitabilityScore: number;
+    matchingReason: string;
+  }[];
+  dispatchRecommendationNotes: string;
+}
+

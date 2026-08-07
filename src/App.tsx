@@ -17,6 +17,9 @@ import { StormAlertCenter } from './components/StormAlertCenter';
 import { InsuranceReportModal } from './components/InsuranceReportModal';
 import { ContractorDashboard } from './components/ContractorDashboard';
 import { ShareModal } from './components/ShareModal';
+import { AIInsuranceReportWriter } from './components/AIInsuranceReportWriter';
+import { AIEmergencyTriageAssistant } from './components/AIEmergencyTriageAssistant';
+import { AIAssistantChatWidget } from './components/AIAssistantChatWidget';
 import { DispatchTicket, TicketStatus, EstimateRequest, LeadItem, ContractorProfile, PaymentTransaction } from './types';
 import { INITIAL_TICKETS, MOCK_INITIAL_LEADS, MOCK_CONTRACTOR_PROFILE } from './data/mockData';
 
@@ -80,7 +83,7 @@ Sitemap: https://a-newroof.com/sitemap.xml`;
     );
   }
 
-  const [activeTab, setActiveTab] = useState<'home' | 'insurance' | 'emergency' | 'estimate' | 'tracker' | 'radar' | 'contractor'>('home');
+  const [activeTab, setActiveTab] = useState<'home' | 'insurance' | 'emergency' | 'estimate' | 'tracker' | 'radar' | 'contractor' | 'aiReportWriter' | 'aiTriage'>('home');
   const [isEmergencyModalOpen, setIsEmergencyModalOpen] = useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [selectedInsuranceTicket, setSelectedInsuranceTicket] = useState<DispatchTicket | null>(null);
@@ -489,7 +492,20 @@ Sitemap: https://a-newroof.com/sitemap.xml`;
             dispatchTickets={tickets}
           />
         )}
+
+        {activeTab === 'aiReportWriter' && (
+          <AIInsuranceReportWriter />
+        )}
+
+        {activeTab === 'aiTriage' && (
+          <AIEmergencyTriageAssistant
+            onDispatchCreated={handleTicketCreated}
+          />
+        )}
       </main>
+
+      {/* Floating 24/7 Gemini AI Assistant Chat Widget */}
+      <AIAssistantChatWidget />
 
       {/* Modals */}
       <EmergencyFlowModal
