@@ -26,9 +26,22 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose }) => {
   const [smsCopied, setSmsCopied] = useState(false);
   const [smsStatusMessage, setSmsStatusMessage] = useState<string | null>(null);
 
+  // Custom Domain State to prevent internal run.app dev URLs from causing generic cookie check walls on social media
+  const getInitialShareUrl = () => {
+    if (typeof window !== 'undefined') {
+      const href = window.location.href;
+      if (!href.includes('run.app') && !href.includes('localhost') && !href.includes('127.0.0.1')) {
+        return href;
+      }
+    }
+    return 'https://a-newroof.com/';
+  };
+
+  const [shareUrl, setShareUrl] = useState<string>(getInitialShareUrl);
+
   if (!isOpen) return null;
 
-  const currentUrl = typeof window !== 'undefined' ? window.location.href : 'https://a-newroof.com/';
+  const currentUrl = shareUrl;
 
   const postCaptions = {
     emergency: `🚨 STORM DAMAGE & ROOF LEAK EMERGENCY HOTLINE 🚨\nIf your home or business roof has storm damage, fallen tree limbs, or leaks, call the 24/7 Emergency Dispatch Center at (706) 740-0529 or request instant crew tarping dispatch online:`,
@@ -412,6 +425,23 @@ Emergency Dispatch Hotline: (706) 740-0529`,
             <Megaphone className="w-3.5 h-3.5" />
             <span>Email/SMS Campaign</span>
           </button>
+        </div>
+
+        {/* Shared Link Target Bar */}
+        <div className="bg-slate-950 px-4 py-2 border-b border-slate-800 flex items-center justify-between text-[11px]">
+          <div className="flex items-center gap-2 overflow-hidden">
+            <span className="text-slate-400 font-bold shrink-0">Shared Website URL:</span>
+            <input
+              type="text"
+              value={shareUrl}
+              onChange={(e) => setShareUrl(e.target.value)}
+              className="bg-slate-900 border border-slate-700/80 rounded-md px-2 py-0.5 text-amber-300 font-mono text-[11px] w-56 sm:w-72 focus:outline-none focus:border-amber-400 truncate"
+              title="Target URL included in social posts and SMS"
+            />
+          </div>
+          <span className="hidden sm:inline-flex bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-[10px] font-semibold px-2 py-0.5 rounded-full shrink-0">
+            ✓ Public Domain (No Cookie Wall)
+          </span>
         </div>
 
         {/* Modal Body Scrollable */}
