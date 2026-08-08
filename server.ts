@@ -36,7 +36,7 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Explicit static sitemap.xml and robots.txt routes
+// Explicit static sitemap.xml, robots.txt, and Search Console verification routes
 app.get('/sitemap.xml', (req, res) => {
   res.header('Content-Type', 'application/xml; charset=utf-8');
   res.sendFile(path.join(process.cwd(), 'public', 'sitemap.xml'));
@@ -45,6 +45,21 @@ app.get('/sitemap.xml', (req, res) => {
 app.get('/robots.txt', (req, res) => {
   res.header('Content-Type', 'text/plain; charset=utf-8');
   res.sendFile(path.join(process.cwd(), 'public', 'robots.txt'));
+});
+
+app.get('/BingSiteAuth.xml', (req, res) => {
+  res.header('Content-Type', 'application/xml; charset=utf-8');
+  res.sendFile(path.join(process.cwd(), 'public', 'BingSiteAuth.xml'));
+});
+
+app.get('/00602699e4b74f38b18b1b1c89c16e86.txt', (req, res) => {
+  res.header('Content-Type', 'text/plain; charset=utf-8');
+  res.sendFile(path.join(process.cwd(), 'public', '00602699e4b74f38b18b1b1c89c16e86.txt'));
+});
+
+app.get('/og-image.jpg', (req, res) => {
+  res.header('Content-Type', 'image/jpeg');
+  res.sendFile(path.join(process.cwd(), 'public', 'og-image.jpg'));
 });
 
 // Endpoint 1: Gemini Contractor Estimate & AI Thoughts Generator

@@ -1,4 +1,6 @@
 import { DispatchTicket, StormAlert, LeadItem, ContractorProfile } from '../types';
+import crewImg from '../assets/images/roofing_crew_work_site_1786147652073.jpg';
+import gafFinishedImg from '../assets/images/gaf_finished_roof_1786147800_1786147849445.jpg';
 
 export const MOCK_INITIAL_LEADS: LeadItem[] = [
   {
@@ -21,8 +23,8 @@ export const MOCK_INITIAL_LEADS: LeadItem[] = [
     isClaimed: false,
     status: 'UNCLAIMED',
     hasActiveLeak: true,
-    notes: 'Severe wind storm ripped off ~200 sq ft shingles over master bedroom. Active ceiling leak!',
-    photoUrl: 'https://images.unsplash.com/photo-1628744876497-eb30460be9f6?auto=format&fit=crop&w=800&q=80',
+    notes: 'On-site crew tearing off shingles and prepping plywood deck. Active replacement job.',
+    photoUrl: crewImg,
   },
   {
     id: 'LEAD-8802',
@@ -140,24 +142,17 @@ export const MOCK_CREW_UNITS = [
 export const SAMPLE_DAMAGE_PHOTOS = [
   {
     id: 'photo-1',
-    url: 'https://images.unsplash.com/photo-1628744876497-eb30460be9f6?auto=format&fit=crop&w=800&q=80',
-    timestamp: 'Today at 2:15 PM',
-    caption: 'Tree limb puncture on south slope near chimney flashing',
-    aiNotes: 'Detected: Structural puncture (~3 sq ft). High probability of wood deck penetration. Immediate tarp seal required.',
+    url: crewImg,
+    timestamp: 'Active Jobsite Audit',
+    caption: 'Licensed contractor crew tearing off old shingles and prepping plywood deck',
+    aiNotes: 'Verified: On-site 5-man crew, dumpster trailer, plywood deck inspection, stacked GAF shingle pallets.',
   },
   {
     id: 'photo-2',
-    url: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80',
-    timestamp: 'Today at 2:18 PM',
-    caption: 'Ceiling water staining & drywall sag in master bedroom',
-    aiNotes: 'Detected: Active water stain with moisture accumulation. Structural ceiling sag danger present.',
-  },
-  {
-    id: 'photo-3',
-    url: 'https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=800&q=80',
-    timestamp: 'Today at 2:22 PM',
-    caption: 'Wind-blown asphalt shingles exposing felt underlayment',
-    aiNotes: 'Detected: Missing shingles over ~45 sq ft area. Vulnerable to rainwater migration.',
+    url: gafFinishedImg,
+    timestamp: 'Final Completed Project',
+    caption: 'Completed single-story residence with GAF Lifetime Weathered Wood system',
+    aiNotes: 'Verified: 50-Year GAF Lifetime System, new gutters, ridge cap ventilation, flawless curb appeal.',
   },
 ];
 
