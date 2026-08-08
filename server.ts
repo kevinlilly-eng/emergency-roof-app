@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import fs from 'fs';
 import { createServer as createViteServer } from 'vite';
 import { GoogleGenAI } from '@google/genai';
 import dotenv from 'dotenv';
@@ -10,6 +11,22 @@ const app = express();
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 
 app.use(express.json({ limit: '10mb' }));
+
+// Serve static assets from /public directly
+app.use(express.static(path.resolve(process.cwd(), 'public')));
+
+// Helper to resolve static file from public or dist directory
+function readStaticFile(filename: string): { content: Buffer | string; exists: boolean } {
+  const publicPath = path.resolve(process.cwd(), 'public', filename);
+  if (fs.existsSync(publicPath)) {
+    return { content: fs.readFileSync(publicPath), exists: true };
+  }
+  const distPath = path.resolve(process.cwd(), 'dist', filename);
+  if (fs.existsSync(distPath)) {
+    return { content: fs.readFileSync(distPath), exists: true };
+  }
+  return { content: '', exists: false };
+}
 
 // Helper to initialize Gemini SDK safely
 function getGeminiClient() {
@@ -38,32 +55,66 @@ app.get('/api/health', (req, res) => {
 
 // Explicit static sitemap.xml, robots.txt, and Search Console verification routes
 app.get('/sitemap.xml', (req, res) => {
-  res.header('Content-Type', 'application/xml; charset=utf-8');
-  res.sendFile(path.join(process.cwd(), 'public', 'sitemap.xml'));
+  const { content, exists } = readStaticFile('sitemap.xml');
+  if (exists) {
+    res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+    return res.status(200).send(content);
+  }
+  return res.status(404).send('sitemap.xml not found');
 });
 
 app.get('/robots.txt', (req, res) => {
-  res.header('Content-Type', 'text/plain; charset=utf-8');
-  res.sendFile(path.join(process.cwd(), 'public', 'robots.txt'));
+  const { content, exists } = readStaticFile('robots.txt');
+  if (exists) {
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+    return res.status(200).send(content);
+  }
+  return res.status(404).send('robots.txt not found');
 });
 
 app.get('/BingSiteAuth.xml', (req, res) => {
-  res.header('Content-Type', 'application/xml; charset=utf-8');
-  res.sendFile(path.join(process.cwd(), 'public', 'BingSiteAuth.xml'));
+  const { content, exists } = readStaticFile('BingSiteAuth.xml');
+  if (exists) {
+    res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+    return res.status(200).send(content);
+  }
+  return res.status(404).send('BingSiteAuth.xml not found');
 });
 
 app.get('/00602699e4b74f38b18b1b1c89c16e86.txt', (req, res) => {
-  res.header('Content-Type', 'text/plain; charset=utf-8');
-  res.sendFile(path.join(process.cwd(), 'public', '00602699e4b74f38b18b1b1c89c16e86.txt'));
+  const { content, exists } = readStaticFile('00602699e4b74f38b18b1b1c89c16e86.txt');
+  if (exists) {
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+    return res.status(200).send(content);
+  }
+  return res.status(404).send('Verification file not found');
 });
 
 app.get('/og-image.jpg', (req, res) => {
-  res.header('Content-Type', 'image/jpeg');
-  res.sendFile(path.join(process.cwd(), 'public', 'og-image.jpg'));
+  const { content, exists } = readStaticFile('og-image.jpg');
+  if (exists) {
+    res.setHeader('Content-Type', 'image/jpeg');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Cache-Control', 'public, max-age=86400');
+    return res.status(200).send(content);
+  }
+  return res.status(404).send('Image not found');
 });
 
 app.get('/emergency-tarp-roof-app.zip', (req, res) => {
-  res.download(path.join(process.cwd(), 'public', 'emergency-tarp-roof-app.zip'));
+  const zipPath = path.resolve(process.cwd(), 'public', 'emergency-tarp-roof-app.zip');
+  if (fs.existsSync(zipPath)) {
+    return res.download(zipPath);
+  }
+  return res.status(404).send('Zip file not found');
 });
 
 // Endpoint 1: Gemini Contractor Estimate & AI Thoughts Generator
