@@ -1,17 +1,9 @@
 import express from 'express';
-import path from 'path';
-import { createServer as createViteServer } from 'vite';
 import { GoogleGenAI } from '@google/genai';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 const app = express();
-const PORT = 3000;
-
 app.use(express.json({ limit: '10mb' }));
 
-// Helper to initialize Gemini SDK safely
 function getGeminiClient() {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
@@ -36,15 +28,25 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Explicit static sitemap.xml and robots.txt routes
 app.get('/sitemap.xml', (req, res) => {
   res.header('Content-Type', 'application/xml; charset=utf-8');
-  res.sendFile(path.join(process.cwd(), 'public', 'sitemap.xml'));
+  res.send(`<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://a-newroof.com/</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>`);
 });
 
 app.get('/robots.txt', (req, res) => {
   res.header('Content-Type', 'text/plain; charset=utf-8');
-  res.sendFile(path.join(process.cwd(), 'public', 'robots.txt'));
+  res.send(`User-agent: *
+Allow: /
+
+Sitemap: https://a-newroof.com/sitemap.xml`);
 });
 
 // Endpoint 1: Gemini Contractor Estimate & AI Thoughts Generator
@@ -271,25 +273,4 @@ Keep answers clear, concise, professional, and well-structured with markdown bul
   }
 });
 
-// Start server with Vite middleware in development or static in production
-async function startServer() {
-  if (process.env.NODE_ENV !== 'production') {
-    const vite = await createViteServer({
-      server: { middlewareMode: true },
-      appType: 'spa',
-    });
-    app.use(vite.middlewares);
-  } else {
-    const distPath = path.join(process.cwd(), 'dist');
-    app.use(express.static(distPath));
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
-    });
-  }
-
-  app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server running on http://0.0.0.0:${PORT}`);
-  });
-}
-
-startServer();
+export default app;

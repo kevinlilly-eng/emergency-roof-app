@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import tarpImg from '../assets/images/emergency_roof_tarp_1786018839293.jpg';
-import damageImg from '../assets/images/roof_damage_inspection_1786018855423.jpg';
+import crewImg from '../assets/images/roofing_crew_work_site_1786147652073.jpg';
+import gafFinishedImg from '../assets/images/gaf_finished_roof_1786147800_1786147849445.jpg';
 import waterDamageImg from '../assets/images/water_damage_ceiling_1786018870888.jpg';
 import { 
   ShieldCheck, 
@@ -164,31 +164,31 @@ export const InsuranceCarrierPortal: React.FC = () => {
           <div className="space-y-4">
             <div className="relative rounded-2xl overflow-hidden shadow-lg border border-slate-200 group">
               <img 
-                src={tarpImg} 
-                alt="Emergency Tarping in Progress" 
+                src={crewImg} 
+                alt="Active Contractor Crew On-Site Roof Replacement" 
                 className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
                 referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent p-3 flex flex-col justify-end text-white">
                 <span className="text-[10px] bg-amber-500 text-slate-950 font-black px-2 py-0.5 rounded uppercase w-max mb-1">
-                  Immediate Loss Mitigation
+                  Active Licensed Jobsite
                 </span>
-                <span className="text-xs font-bold">Heavy-Duty Tarp Installation</span>
+                <span className="text-xs font-bold">Contractor Crew Installation</span>
               </div>
             </div>
 
             <div className="relative rounded-2xl overflow-hidden shadow-lg border border-slate-200 group">
               <img 
-                src={damageImg} 
-                alt="Storm Roof Damage Photo Audit" 
+                src={gafFinishedImg} 
+                alt="Completed Home GAF Lifetime System" 
                 className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500"
                 referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent p-3 flex flex-col justify-end text-white">
                 <span className="text-[10px] bg-blue-500 text-white font-bold px-2 py-0.5 rounded uppercase w-max mb-1">
-                  Adjuster Photo Audit
+                  Finished System Audit
                 </span>
-                <span className="text-xs font-bold">FNOL Geotagged Proof</span>
+                <span className="text-xs font-bold">GAF Lifetime System Residence</span>
               </div>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import React from 'react';
-import shingleImg from '../assets/images/shingle_roof_install_1786018885196.jpg';
+import crewImg from '../assets/images/roofing_crew_work_site_1786147652073.jpg';
+import gafFinishedImg from '../assets/images/gaf_finished_roof_1786147800_1786147849445.jpg';
 import metalImg from '../assets/images/metal_standing_seam_1786018903761.jpg';
 import chimneyImg from '../assets/images/chimney_flashing_brick_1786018923230.jpg';
 import skylightImg from '../assets/images/skylight_roof_window_1786018938763.jpg';
@@ -47,7 +48,7 @@ export const SERVICES_LIST: RoofingServiceItem[] = [
     icon: <Home className="w-6 h-6 text-blue-600" />,
     badge: 'Popular Choice',
     badgeColor: 'bg-blue-100 text-blue-800 border-blue-200',
-    imageUrl: shingleImg,
+    imageUrl: crewImg,
     description: 'Complete tear-off and precision installation of brand-new roof systems using premium underlayment, ridge ventilation, and ice/water shields.',
     keyFeatures: [
       'Architectural 30-Yr & 50-Yr Shingles',
@@ -143,7 +144,7 @@ export const SERVICES_LIST: RoofingServiceItem[] = [
     icon: <Crown className="w-6 h-6 text-purple-600" />,
     badge: '50-Year Warranty',
     badgeColor: 'bg-purple-100 text-purple-800 border-purple-200',
-    imageUrl: shingleImg,
+    imageUrl: gafFinishedImg,
     description: 'Top-tier total protection roofing systems featuring heavy HD architectural shingles, starter strips, ridge cap shingles, and lifetime non-prorated material protection.',
     keyFeatures: [
       'GAF Timberline HDZ / CertainTeed Landmark Systems',
@@ -174,6 +175,61 @@ export const ServicesShowcase: React.FC<ServicesShowcaseProps> = ({
         <p className="text-sm sm:text-base text-slate-600 font-medium">
           From full new roof replacements and standing seam metal systems to chimney flashing and leak repairs, our certified crews deliver master craftsman quality for every property.
         </p>
+      </div>
+
+      {/* On-Site Crew & Completed Home Dual Feature Showcase */}
+      <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-800 space-y-6">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="space-y-2 max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs font-bold uppercase tracking-wider">
+              <ShieldCheck className="w-4 h-4 text-amber-400" />
+              Verified Local Project Showcase
+            </div>
+            <h3 className="text-2xl sm:text-3xl font-black text-white leading-tight">
+              Master Craftsmanship: From Active Crew Tear-Off to Completed GAF Lifetime Roof
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-medium">
+              Real jobsite transformation featuring our certified roofing installation crew tearing off old shingles with full lawn protection, followed by a completed GAF Lifetime Weathered Wood System installation.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap md:flex-col gap-2 text-xs font-semibold text-amber-300 shrink-0">
+            <span className="bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700">✓ OSHA Safety Compliant Crew</span>
+            <span className="bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700">✓ Full Lawn & Screen Protection</span>
+            <span className="bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700">✓ 50-Year GAF Lifetime System</span>
+          </div>
+        </div>
+
+        {/* Dual Image Gallery Grid */}
+        <div className="grid md:grid-cols-2 gap-4">
+          {/* Image 1: Active Crew Tear-Off */}
+          <div className="relative rounded-2xl overflow-hidden border-2 border-amber-500/40 shadow-2xl h-56 sm:h-64 group">
+            <img
+              src={crewImg}
+              alt="Licensed roofing crew performing full residential roof replacement and tear off"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent p-4 flex items-center justify-between text-xs font-bold text-white">
+              <span className="font-bold">1. Active Tear-Off & Prep Crew</span>
+              <span className="bg-amber-500 text-slate-950 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase">Active Job Site</span>
+            </div>
+          </div>
+
+          {/* Image 2: Finished GAF Lifetime System Residence */}
+          <div className="relative rounded-2xl overflow-hidden border-2 border-emerald-500/40 shadow-2xl h-56 sm:h-64 group">
+            <img
+              src={gafFinishedImg}
+              alt="Completed single story ranch home with GAF Lifetime Weathered Wood roof system"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent p-4 flex items-center justify-between text-xs font-bold text-white">
+              <span className="font-bold">2. Completed GAF Lifetime Roof Home</span>
+              <span className="bg-emerald-500 text-slate-950 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase">Final Inspection Passed</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Grid of 7 Services */}
