@@ -12,12 +12,32 @@ import {
   FileText, 
   Siren, 
   Sparkles, 
-  ChevronDown 
+  ChevronDown,
+  Webhook,
+  Lock,
+  Server,
+  Search,
+  ShieldCheck
 } from 'lucide-react';
 
+export type NavTabType = 
+  | 'home' 
+  | 'insurance' 
+  | 'emergency' 
+  | 'estimate' 
+  | 'tracker' 
+  | 'radar' 
+  | 'contractor' 
+  | 'aiReportWriter' 
+  | 'aiTriage' 
+  | 'securityPrivacy' 
+  | 'seoDiscoverability' 
+  | 'webhooks' 
+  | 'enterpriseAudit';
+
 interface HeaderProps {
-  activeTab: 'home' | 'insurance' | 'emergency' | 'estimate' | 'tracker' | 'radar' | 'contractor' | 'aiReportWriter' | 'aiTriage';
-  setActiveTab: (tab: 'home' | 'insurance' | 'emergency' | 'estimate' | 'tracker' | 'radar' | 'contractor' | 'aiReportWriter' | 'aiTriage') => void;
+  activeTab: NavTabType;
+  setActiveTab: (tab: NavTabType) => void;
   activeTicketCount: number;
   unclaimedLeadCount?: number;
   onEmergencyPress: () => void;
@@ -33,7 +53,9 @@ export const Header: React.FC<HeaderProps> = ({
   onSharePress,
 }) => {
   const [isAiDropdownOpen, setIsAiDropdownOpen] = useState(false);
+  const [isEnterpriseDropdownOpen, setIsEnterpriseDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const enterpriseDropdownRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown on click outside
   useEffect(() => {
@@ -41,12 +63,16 @@ export const Header: React.FC<HeaderProps> = ({
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsAiDropdownOpen(false);
       }
+      if (enterpriseDropdownRef.current && !enterpriseDropdownRef.current.contains(event.target as Node)) {
+        setIsEnterpriseDropdownOpen(false);
+      }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   const isAiTabActive = activeTab === 'aiReportWriter' || activeTab === 'aiTriage';
+  const isEnterpriseTabActive = activeTab === 'securityPrivacy' || activeTab === 'seoDiscoverability' || activeTab === 'webhooks' || activeTab === 'enterpriseAudit';
 
   return (
     <header className="sticky top-0 z-40 bg-slate-900 border-b border-slate-800 text-white shadow-xl">
@@ -222,6 +248,102 @@ export const Header: React.FC<HeaderProps> = ({
               )}
             </div>
 
+            {/* Enterprise Suite Dropdown (Webhooks & Audit) */}
+            <div className="relative" ref={enterpriseDropdownRef}>
+              <button
+                onClick={() => setIsEnterpriseDropdownOpen(!isEnterpriseDropdownOpen)}
+                className={`px-3 py-2 rounded-xl text-xs font-extrabold flex items-center gap-1.5 transition-all border ${
+                  isEnterpriseTabActive
+                    ? 'bg-indigo-600 text-white border-indigo-400 shadow-md'
+                    : 'bg-slate-800 text-indigo-300 border-indigo-500/30 hover:bg-slate-700'
+                }`}
+              >
+                <Server className="w-4 h-4 text-indigo-400" />
+                <span>Enterprise</span>
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform ${isEnterpriseDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+
+              {isEnterpriseDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-72 bg-slate-950 rounded-2xl border border-slate-800 shadow-2xl p-2 z-50 space-y-1">
+                  <div className="px-3 py-1.5 text-[10px] font-black uppercase tracking-wider text-slate-500 border-b border-slate-800">
+                    Google & Enterprise Architecture
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      setActiveTab('securityPrivacy');
+                      setIsEnterpriseDropdownOpen(false);
+                    }}
+                    className={`w-full text-left p-2.5 rounded-xl text-xs font-bold flex items-center gap-2.5 transition-colors ${
+                      activeTab === 'securityPrivacy'
+                        ? 'bg-emerald-600 text-white'
+                        : 'text-slate-200 hover:bg-slate-900'
+                    }`}
+                  >
+                    <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <div>
+                      <div>Feature #1: Security & Privacy Baseline</div>
+                      <div className="text-[10px] font-normal text-slate-400">RBAC, PII Sanitizer & GDPR Privacy</div>
+                    </div>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setActiveTab('seoDiscoverability');
+                      setIsEnterpriseDropdownOpen(false);
+                    }}
+                    className={`w-full text-left p-2.5 rounded-xl text-xs font-bold flex items-center gap-2.5 transition-colors ${
+                      activeTab === 'seoDiscoverability'
+                        ? 'bg-sky-600 text-white'
+                        : 'text-slate-200 hover:bg-slate-900'
+                    }`}
+                  >
+                    <Search className="w-4 h-4 text-sky-400 shrink-0" />
+                    <div>
+                      <div>Feature #5: SEO & Google Search</div>
+                      <div className="text-[10px] font-normal text-slate-400">JSON-LD Schema, Meta Tags & Sitemap</div>
+                    </div>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setActiveTab('webhooks');
+                      setIsEnterpriseDropdownOpen(false);
+                    }}
+                    className={`w-full text-left p-2.5 rounded-xl text-xs font-bold flex items-center gap-2.5 transition-colors ${
+                      activeTab === 'webhooks'
+                        ? 'bg-indigo-600 text-white'
+                        : 'text-slate-200 hover:bg-slate-900'
+                    }`}
+                  >
+                    <Webhook className="w-4 h-4 text-indigo-400 shrink-0" />
+                    <div>
+                      <div>Webhook Event Hub</div>
+                      <div className="text-[10px] font-normal text-slate-400">HMAC-SHA256 signatures & Pub/Sub</div>
+                    </div>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setActiveTab('enterpriseAudit');
+                      setIsEnterpriseDropdownOpen(false);
+                    }}
+                    className={`w-full text-left p-2.5 rounded-xl text-xs font-bold flex items-center gap-2.5 transition-colors ${
+                      activeTab === 'enterpriseAudit'
+                        ? 'bg-rose-600 text-white'
+                        : 'text-slate-200 hover:bg-slate-900'
+                    }`}
+                  >
+                    <Lock className="w-4 h-4 text-rose-400 shrink-0" />
+                    <div>
+                      <div>SLA & Incident Audit</div>
+                      <div className="text-[10px] font-normal text-slate-400">4-tier escalation & SOC2 audit logs</div>
+                    </div>
+                  </button>
+                </div>
+              )}
+            </div>
+
             {/* Contractor Portal */}
             <button
               onClick={() => setActiveTab('contractor')}
@@ -313,6 +435,38 @@ export const Header: React.FC<HeaderProps> = ({
             }`}
           >
             <CloudLightning className="w-3.5 h-3.5" /> Radar
+          </button>
+          <button
+            onClick={() => setActiveTab('securityPrivacy')}
+            className={`px-3 py-1.5 rounded-lg whitespace-nowrap flex items-center gap-1.5 ${
+              activeTab === 'securityPrivacy' ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-emerald-300 border border-emerald-500/30'
+            }`}
+          >
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> Security (#1)
+          </button>
+          <button
+            onClick={() => setActiveTab('seoDiscoverability')}
+            className={`px-3 py-1.5 rounded-lg whitespace-nowrap flex items-center gap-1.5 ${
+              activeTab === 'seoDiscoverability' ? 'bg-sky-600 text-white' : 'bg-slate-800 text-sky-300 border border-sky-500/30'
+            }`}
+          >
+            <Search className="w-3.5 h-3.5 text-sky-400" /> SEO (#5)
+          </button>
+          <button
+            onClick={() => setActiveTab('webhooks')}
+            className={`px-3 py-1.5 rounded-lg whitespace-nowrap flex items-center gap-1.5 ${
+              activeTab === 'webhooks' ? 'bg-indigo-600 text-white' : 'bg-slate-800 text-indigo-300 border border-indigo-500/30'
+            }`}
+          >
+            <Webhook className="w-3.5 h-3.5 text-indigo-400" /> Webhooks
+          </button>
+          <button
+            onClick={() => setActiveTab('enterpriseAudit')}
+            className={`px-3 py-1.5 rounded-lg whitespace-nowrap flex items-center gap-1.5 ${
+              activeTab === 'enterpriseAudit' ? 'bg-rose-600 text-white' : 'bg-slate-800 text-rose-300 border border-rose-500/30'
+            }`}
+          >
+            <Lock className="w-3.5 h-3.5 text-rose-400" /> Audit
           </button>
           <button
             onClick={() => setActiveTab('contractor')}

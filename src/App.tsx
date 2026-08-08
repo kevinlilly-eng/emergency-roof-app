@@ -6,7 +6,7 @@
 import React, { useState, useEffect } from 'react';
 import { collection, doc, onSnapshot, setDoc, updateDoc } from 'firebase/firestore';
 import { db, handleFirestoreError, OperationType } from './lib/firebase';
-import { Header } from './components/Header';
+import { Header, NavTabType } from './components/Header';
 import { WelcomeHero } from './components/WelcomeHero';
 import { InsuranceCarrierPortal } from './components/InsuranceCarrierPortal';
 import { ServicesShowcase } from './components/ServicesShowcase';
@@ -20,6 +20,10 @@ import { ShareModal } from './components/ShareModal';
 import { AIInsuranceReportWriter } from './components/AIInsuranceReportWriter';
 import { AIEmergencyTriageAssistant } from './components/AIEmergencyTriageAssistant';
 import { AIAssistantChatWidget } from './components/AIAssistantChatWidget';
+import { WebhookManager } from './components/WebhookManager';
+import { EnterpriseAuditAndIncidentCenter } from './components/EnterpriseAuditAndIncidentCenter';
+import { SecurityPrivacyCenter } from './components/SecurityPrivacyCenter';
+import { SEODiscoverabilityCenter } from './components/SEODiscoverabilityCenter';
 import { DispatchTicket, TicketStatus, EstimateRequest, LeadItem, ContractorProfile, PaymentTransaction } from './types';
 import { INITIAL_TICKETS, MOCK_INITIAL_LEADS, MOCK_CONTRACTOR_PROFILE } from './data/mockData';
 
@@ -83,7 +87,7 @@ Sitemap: https://a-newroof.com/sitemap.xml`;
     );
   }
 
-  const [activeTab, setActiveTab] = useState<'home' | 'insurance' | 'emergency' | 'estimate' | 'tracker' | 'radar' | 'contractor' | 'aiReportWriter' | 'aiTriage'>('home');
+  const [activeTab, setActiveTab] = useState<NavTabType>('home');
   const [isEmergencyModalOpen, setIsEmergencyModalOpen] = useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [selectedInsuranceTicket, setSelectedInsuranceTicket] = useState<DispatchTicket | null>(null);
@@ -501,6 +505,22 @@ Sitemap: https://a-newroof.com/sitemap.xml`;
           <AIEmergencyTriageAssistant
             onDispatchCreated={handleTicketCreated}
           />
+        )}
+
+        {activeTab === 'securityPrivacy' && (
+          <SecurityPrivacyCenter />
+        )}
+
+        {activeTab === 'seoDiscoverability' && (
+          <SEODiscoverabilityCenter />
+        )}
+
+        {activeTab === 'webhooks' && (
+          <WebhookManager />
+        )}
+
+        {activeTab === 'enterpriseAudit' && (
+          <EnterpriseAuditAndIncidentCenter />
         )}
       </main>
 

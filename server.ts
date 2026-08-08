@@ -1,7 +1,6 @@
 import express from 'express';
 import path from 'path';
 import fs from 'fs';
-import { createServer as createViteServer } from 'vite';
 import { GoogleGenAI } from '@google/genai';
 import dotenv from 'dotenv';
 
@@ -115,6 +114,14 @@ app.get('/emergency-tarp-roof-app.zip', (req, res) => {
     return res.download(zipPath);
   }
   return res.status(404).send('Zip file not found');
+});
+
+app.get('/release-v1.0.1.zip', (req, res) => {
+  const zipPath = path.resolve(process.cwd(), 'public', 'release-v1.0.1.zip');
+  if (fs.existsSync(zipPath)) {
+    return res.download(zipPath);
+  }
+  return res.status(404).send('Release zip file not found');
 });
 
 // Endpoint 1: Gemini Contractor Estimate & AI Thoughts Generator
@@ -344,6 +351,7 @@ Keep answers clear, concise, professional, and well-structured with markdown bul
 // Start server with Vite middleware in development or static in production
 async function startServer() {
   if (process.env.NODE_ENV !== 'production') {
+    const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: 'spa',
@@ -352,7 +360,7 @@ async function startServer() {
   } else {
     const distPath = path.join(process.cwd(), 'dist');
     app.use(express.static(distPath));
-    app.get('*', (req, res) => {
+    app.get('(.*)', (req, res) => {
       res.sendFile(path.join(distPath, 'index.html'));
     });
   }
