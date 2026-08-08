@@ -453,6 +453,8 @@ Sitemap: https://a-newroof.com/sitemap.xml`;
               onSelectStandardEstimate={() => setActiveTab('estimate')}
               onSelectEmergencyDispatch={() => setIsEmergencyModalOpen(true)}
               activeTicketCount={tickets.length}
+              onSelectAiTriage={() => setActiveTab('aiTriage')}
+              onSelectAiReportWriter={() => setActiveTab('aiReportWriter')}
             />
             <ServicesShowcase
               onSelectService={() => setActiveTab('estimate')}

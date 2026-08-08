@@ -229,3 +229,19 @@ export interface GeminiTriageResponse {
   dispatchRecommendationNotes: string;
 }
 
+export interface GeminiFacebookAdResponse {
+  primaryText: string;
+  headline: string;
+  linkDescription: string;
+  callToActionBtn: string;
+  targetAudience: {
+    locations: string;
+    ageGender: string;
+    interests: string[];
+    behaviors: string;
+  };
+  recommendedBudget: string;
+  proMarketingTip: string;
+}
+
+

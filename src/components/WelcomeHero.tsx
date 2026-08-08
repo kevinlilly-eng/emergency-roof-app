@@ -10,22 +10,34 @@ import {
   CheckCircle2, 
   Sparkles,
   Zap,
-  ArrowRight
+  ArrowRight,
+  FileText,
+  Siren,
+  Bot
 } from 'lucide-react';
+
+import crewImg from '../assets/images/roofing_crew_work_site_1786147652073.jpg';
+import gafFinishedImg from '../assets/images/gaf_finished_roof_1786147800_1786147849445.jpg';
+import stormDamageImg from '../assets/images/roof_damage_inspection_1786018855423.jpg';
+import emergencyTarpImg from '../assets/images/emergency_roof_tarp_1786018839293.jpg';
 
 interface WelcomeHeroProps {
   onSelectStandardEstimate: () => void;
   onSelectEmergencyDispatch: () => void;
   activeTicketCount: number;
+  onSelectAiTriage?: () => void;
+  onSelectAiReportWriter?: () => void;
 }
 
 export const WelcomeHero: React.FC<WelcomeHeroProps> = ({
   onSelectStandardEstimate,
   onSelectEmergencyDispatch,
   activeTicketCount,
+  onSelectAiTriage,
+  onSelectAiReportWriter,
 }) => {
   return (
-    <div className="space-y-8 pb-12">
+    <div className="space-y-10 pb-12">
       {/* Brand Hero Header */}
       <div className="text-center space-y-4 pt-4 sm:pt-6 max-w-4xl mx-auto">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 text-blue-700 border border-blue-500/20 text-xs font-extrabold uppercase tracking-wider">
@@ -81,13 +93,175 @@ export const WelcomeHero: React.FC<WelcomeHeroProps> = ({
             Under 1 Hour Tarp Crew Arrival
           </span>
           <span className="flex items-center gap-1.5 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-            Zero Friction Policyholder App
+            <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+            Google Gemini 24/7 AI Triage & Claims
           </span>
           <span className="flex items-center gap-1.5 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">
             <MapPin className="w-3.5 h-3.5 text-blue-600" />
             GPS Geotagged Adjuster Audit
           </span>
+        </div>
+      </div>
+
+      {/* Hero Photo Gallery Banner Showcase */}
+      <div className="max-w-4xl mx-auto px-4">
+        <div className="bg-slate-900 rounded-3xl p-4 sm:p-6 border border-slate-800 shadow-2xl space-y-4">
+          <div className="flex items-center justify-between text-xs text-slate-300">
+            <div className="flex items-center gap-2 font-bold text-amber-400">
+              <Camera className="w-4 h-4" />
+              <span>Real Emergency Jobsite Photo Showcase</span>
+            </div>
+            <span className="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase">
+              ✓ Verified Master Roofers
+            </span>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {/* Photo 1: Active Tarping */}
+            <div className="relative rounded-2xl overflow-hidden h-36 sm:h-44 border border-slate-700 group">
+              <img 
+                src={emergencyTarpImg} 
+                alt="Emergency heavy duty roof tarp installation" 
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent p-2.5 flex items-end">
+                <span className="text-[10px] font-extrabold text-amber-300 bg-slate-950/80 px-2 py-0.5 rounded-md backdrop-blur">
+                  1. Emergency Tarping
+                </span>
+              </div>
+            </div>
+
+            {/* Photo 2: Roof Crew Tear Off */}
+            <div className="relative rounded-2xl overflow-hidden h-36 sm:h-44 border border-slate-700 group">
+              <img 
+                src={crewImg} 
+                alt="Licensed roofing crew tear off and roof replacement" 
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent p-2.5 flex items-end">
+                <span className="text-[10px] font-extrabold text-blue-300 bg-slate-950/80 px-2 py-0.5 rounded-md backdrop-blur">
+                  2. Active Crew Work
+                </span>
+              </div>
+            </div>
+
+            {/* Photo 3: Storm Damage Inspection */}
+            <div className="relative rounded-2xl overflow-hidden h-36 sm:h-44 border border-slate-700 group">
+              <img 
+                src={stormDamageImg} 
+                alt="Storm damage roof inspection and loss audit" 
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent p-2.5 flex items-end">
+                <span className="text-[10px] font-extrabold text-red-300 bg-slate-950/80 px-2 py-0.5 rounded-md backdrop-blur">
+                  3. Storm Leak Audit
+                </span>
+              </div>
+            </div>
+
+            {/* Photo 4: Finished GAF Roof */}
+            <div className="relative rounded-2xl overflow-hidden h-36 sm:h-44 border border-slate-700 group">
+              <img 
+                src={gafFinishedImg} 
+                alt="Completed GAF Weathered Wood lifetime shingle roof system" 
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent p-2.5 flex items-end">
+                <span className="text-[10px] font-extrabold text-emerald-300 bg-slate-950/80 px-2 py-0.5 rounded-md backdrop-blur">
+                  4. Finished GAF Roof
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Prominent Gemini AI Suite Feature Card directly in Hero */}
+      <div className="max-w-4xl mx-auto px-4">
+        <div className="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white rounded-3xl p-6 sm:p-8 border-2 border-amber-500/50 shadow-2xl space-y-6 relative overflow-hidden">
+          {/* Glowing AI Badge Accent */}
+          <div className="absolute top-0 right-0 bg-gradient-to-r from-amber-500 to-amber-400 text-slate-950 text-[10px] font-black uppercase tracking-widest px-4 py-1 rounded-bl-2xl shadow-md flex items-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 fill-slate-950 text-slate-950 animate-spin" />
+            24/7 GEMINI AI ENGINE ACTIVE
+          </div>
+
+          <div className="space-y-3 pt-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-black uppercase tracking-wider">
+              <Bot className="w-4 h-4 text-amber-400" />
+              Artificial Intelligence Claims & Triage Center
+            </div>
+
+            <h2 className="text-2xl sm:text-3xl font-black text-white leading-tight">
+              AI-Powered Storm Damage Assessment & Insurance Supplement Generator
+            </h2>
+
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-medium max-w-2xl">
+              Utilize our Google Gemini AI suite to instantly score emergency damage severity, calculate required tarping materials, cite IRC building code compliance mandates, and draft carrier-ready insurance claim supplements.
+            </p>
+          </div>
+
+          {/* 2 Interactive AI Module Cards */}
+          <div className="grid md:grid-cols-2 gap-4 pt-2">
+            {/* AI Module 1: Smart Emergency Triage */}
+            <div className="bg-slate-900/90 p-4 rounded-2xl border border-slate-800 hover:border-red-500/60 transition-all space-y-3 flex flex-col justify-between">
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <div className="w-9 h-9 rounded-xl bg-red-500/20 text-red-400 border border-red-500/30 flex items-center justify-center font-bold">
+                    <Siren className="w-5 h-5 animate-pulse" />
+                  </div>
+                  <span className="text-[10px] font-extrabold text-red-400 bg-red-500/10 px-2 py-0.5 rounded-full border border-red-500/20">
+                    Instant Hazard Scoring
+                  </span>
+                </div>
+                <h3 className="text-base font-bold text-white">24/7 AI Smart Emergency Triage</h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Evaluates roof leaks, fallen limbs, and severe weather damage to generate an instant 1-100 severity score, equipment checklist, and priority crew dispatch recommendation.
+                </p>
+              </div>
+
+              {onSelectAiTriage && (
+                <button
+                  onClick={onSelectAiTriage}
+                  className="w-full bg-red-600 hover:bg-red-500 text-white font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-md"
+                >
+                  <Siren className="w-4 h-4" />
+                  <span>Launch AI Triage Assistant</span>
+                </button>
+              )}
+            </div>
+
+            {/* AI Module 2: Insurance Report Writer */}
+            <div className="bg-slate-900/90 p-4 rounded-2xl border border-slate-800 hover:border-amber-500/60 transition-all space-y-3 flex flex-col justify-between">
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <div className="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center font-bold">
+                    <FileText className="w-5 h-5" />
+                  </div>
+                  <span className="text-[10px] font-extrabold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20">
+                    IRC Code Citations
+                  </span>
+                </div>
+                <h3 className="text-base font-bold text-white">AI Insurance Claim Supplement Writer</h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Drafts formal, carrier-ready supplement reports with Xactimate line items, IRC code justifications, and adjuster rebuttal points to maximize claim approvals.
+                </p>
+              </div>
+
+              {onSelectAiReportWriter && (
+                <button
+                  onClick={onSelectAiReportWriter}
+                  className="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-md"
+                >
+                  <FileText className="w-4 h-4" />
+                  <span>Launch AI Supplement Writer</span>
+                </button>
+              )}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -170,7 +344,7 @@ export const WelcomeHero: React.FC<WelcomeHeroProps> = ({
             </p>
 
             <div className="bg-amber-50 border border-amber-200/80 p-3 rounded-xl space-y-1.5 text-xs text-amber-950">
-              <div className="font-bold flex items-center gap-1.5 text-amber-900">
+              <div className="font-bold flex items-center gap-1.5 text-amber-700">
                 <Camera className="w-3.5 h-3.5 text-amber-700" />
                 Damage Capture & Insurance Lock
               </div>

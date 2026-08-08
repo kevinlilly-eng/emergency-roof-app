@@ -323,6 +323,71 @@ Return ONLY a JSON object:
   }
 });
 
+// Endpoint 3B: AI Facebook & Instagram Ad Campaign Generator
+app.post('/api/gemini/facebook-ad', async (req, res) => {
+  try {
+    const ai = getGeminiClient();
+    const { campaignGoal, targetRegion, ctaPhone, selectedPhoto } = req.body;
+
+    const systemInstruction = `You are a high-converting Facebook Ads & Meta Performance Marketing Specialist for commercial & residential roofing companies.
+Generate high-converting Facebook Ad copy, headlines, newsfeed link descriptions, target audience parameters, and budget strategy tailored for emergency roof tarping, storm damage repair, and roofing services.`;
+
+    const prompt = `Generate a high-converting Facebook Ad strategy for:
+- Campaign Goal: ${campaignGoal || 'Emergency Roof Tarping & Rapid Leak Repair'}
+- Target Location / Region: ${targetRegion || 'Metro Atlanta & North Georgia'}
+- Phone Hotline CTA: ${ctaPhone || '(706) 740-0529'}
+- Selected Ad Image Concept: ${selectedPhoto || 'Emergency Roof Tarping Crew'}
+
+Return ONLY a JSON object with:
+{
+  "primaryText": "Catchy primary ad body text with emojis, storm urgency, and clear benefits (120-250 words)",
+  "headline": "High-converting ad headline (under 10 words, e.g. 🚨 Storm Leak? Emergency Roof Tarping Crew Dispatched 24/7)",
+  "linkDescription": "Newsfeed link description (e.g. Call (706) 740-0529 or Request Crew Dispatch Online. Zero Out of Pocket with Carrier Claims.)",
+  "callToActionBtn": "Call Now" | "Learn More" | "Book Now" | "Contact Us",
+  "targetAudience": {
+    "locations": "Cities / Zip codes or radius (e.g. 25-mile radius around target region)",
+    "ageGender": "Homeowners aged 28–65+, All Genders",
+    "interests": ["Home Improvement", "Roofing", "Property Management", "Storm Preparedness", "Insurance Claims"],
+    "behaviors": "Homeowners, Recent Storm Affected Residents"
+  },
+  "recommendedBudget": "$15 – $35 / day during storm events",
+  "proMarketingTip": "Actionable advice to maximize ad ROI and conversion rate"
+}`;
+
+    const response = await ai.models.generateContent({
+      model: 'gemini-3.6-flash',
+      contents: prompt,
+      config: {
+        systemInstruction,
+        responseMimeType: 'application/json',
+      },
+    });
+
+    const parsedData = JSON.parse(response.text || '{}');
+    res.json({ success: true, data: parsedData });
+  } catch (error: any) {
+    console.error('Error in Facebook Ad generator:', error);
+    // Provide fallback high-converting ad JSON so user experience never breaks even on rate limit
+    res.json({
+      success: true,
+      data: {
+        primaryText: `🚨 STORM DAMAGE & ROOF LEAK EMERGENCY? 🚨\n\nWhen a sudden storm punctures your roof, seconds count! Protect your home from devastating interior water damage with our 24/7 Emergency Tarping & Rapid Leak Response Unit.\n\n✅ 60-Minute Rapid Crew Dispatch\n✅ Heavy-Duty UV Storm Tarps & Nail-Sealed Anchors\n✅ Direct Insurance Claim Carrier Supplement & Report Generator\n✅ Free 21-Point Roof Inspection\n\nDon't let rain ruin your ceilings. Call our 24/7 Dispatch Center at (706) 740-0529 or tap below to request an emergency crew online!`,
+        headline: `🚨 Roof Leak or Storm Damage? Emergency Tarping Crew Dispatched 24/7!`,
+        linkDescription: `Call (706) 740-0529 or request rapid crew dispatch online. 100% Carrier Claim Supported.`,
+        callToActionBtn: `Call Now`,
+        targetAudience: {
+          locations: `${targetRegion || 'Metro Atlanta & Statewide GA'} (25-mile radius)`,
+          ageGender: `Homeowners aged 30–65+`,
+          interests: [`Home Improvement`, `Roofing`, `Storm Preparedness`, `Property Management`],
+          behaviors: `Homeowners, Property Managers`
+        },
+        recommendedBudget: `$20 – $50 / day during active weather alerts`,
+        proMarketingTip: `Attach the real jobsite tarping photo below to your Facebook Ad to boost click-through rates by up to 300%!`
+      }
+    });
+  }
+});
+
 // Endpoint 4: Interactive Gemini AI Roofing & Claims Chat Assistant
 app.post('/api/gemini/chat', async (req, res) => {
   try {

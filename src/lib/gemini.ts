@@ -2,8 +2,10 @@ import {
   RooferCustomRates, 
   GeminiEstimateResponse, 
   GeminiSupplementResponse, 
-  GeminiTriageResponse 
+  GeminiTriageResponse,
+  GeminiFacebookAdResponse
 } from '../types';
+
 
 export async function generateGeminiEstimate(
   rooferRates: RooferCustomRates,
@@ -62,6 +64,26 @@ export async function runEmergencyTriage(
   return json.data as GeminiTriageResponse;
 }
 
+export async function generateFacebookAdWithAi(
+  campaignGoal: string,
+  targetRegion: string,
+  ctaPhone: string,
+  selectedPhoto: string
+): Promise<GeminiFacebookAdResponse> {
+  const res = await fetch('/api/gemini/facebook-ad', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ campaignGoal, targetRegion, ctaPhone, selectedPhoto }),
+  });
+
+  const json = await res.json();
+  if (!res.ok || !json.success) {
+    throw new Error(json.error || 'Failed to generate Facebook Ad with AI');
+  }
+
+  return json.data as GeminiFacebookAdResponse;
+}
+
 export async function sendGeminiChatMessage(
   messages: { role: string; text: string }[],
   context?: Record<string, any>
@@ -79,3 +101,4 @@ export async function sendGeminiChatMessage(
 
   return json.text;
 }
+

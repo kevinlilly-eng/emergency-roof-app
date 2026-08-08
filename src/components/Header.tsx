@@ -367,12 +367,12 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="flex items-center gap-2 sm:gap-3">
             <button
               onClick={onSharePress}
-              className="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-bold text-xs sm:text-sm px-3 py-2 rounded-xl flex items-center gap-1.5 transition-all active:scale-95 shadow-sm"
-              title="Email/SMS Campaign Generator & Social Share"
+              className="bg-gradient-to-r from-blue-600/30 to-indigo-600/30 hover:from-blue-600/50 hover:to-indigo-600/50 text-blue-200 border border-blue-500/40 font-bold text-xs sm:text-sm px-3 py-2 rounded-xl flex items-center gap-1.5 transition-all active:scale-95 shadow-md"
+              title="Facebook Ads Generator, AI Social Studio & Email/SMS Campaigns"
             >
               <Share2 className="w-4 h-4 text-amber-400" />
-              <span className="hidden sm:inline">Campaigns & Share</span>
-              <span className="sm:hidden">Share</span>
+              <span className="hidden sm:inline">FB Ads & Share</span>
+              <span className="sm:hidden">FB Ads</span>
             </button>
 
             <button
