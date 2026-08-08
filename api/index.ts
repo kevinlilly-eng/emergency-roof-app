@@ -30,23 +30,43 @@ app.get('/api/health', (req, res) => {
 
 app.get('/sitemap.xml', (req, res) => {
   res.header('Content-Type', 'application/xml; charset=utf-8');
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Cache-Control', 'public, max-age=0, must-revalidate');
   res.send(`<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://a-newroof.com/</loc>
-    <lastmod>2026-08-07</lastmod>
-    <changefreq>daily</changefreq>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>hourly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://a-newroof.com/og-image.jpg</image:loc>
+      <image:title>24/7 Emergency Roof Tarping and Leak Repair Hotline (706) 740-0529</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.a-newroof.com/</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.a-newroof.com/og-image.jpg</image:loc>
+      <image:title>24/7 Emergency Roof Tarping and Leak Repair Hotline (706) 740-0529</image:title>
+    </image:image>
   </url>
 </urlset>`);
 });
 
 app.get('/robots.txt', (req, res) => {
   res.header('Content-Type', 'text/plain; charset=utf-8');
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Cache-Control', 'public, max-age=0, must-revalidate');
   res.send(`User-agent: *
 Allow: /
 
-Sitemap: https://a-newroof.com/sitemap.xml`);
+Sitemap: https://a-newroof.com/sitemap.xml
+Sitemap: https://www.a-newroof.com/sitemap.xml`);
 });
 
 // Endpoint 1: Gemini Contractor Estimate & AI Thoughts Generator
