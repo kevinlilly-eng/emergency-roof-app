@@ -23,6 +23,8 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose }) => {
   const [copiedCampaignSubject, setCopiedCampaignSubject] = useState(false);
   const [copiedCampaignBody, setCopiedCampaignBody] = useState(false);
   const [copiedCampaignSms, setCopiedCampaignSms] = useState(false);
+  const [smsCopied, setSmsCopied] = useState(false);
+  const [smsStatusMessage, setSmsStatusMessage] = useState<string | null>(null);
 
   if (!isOpen) return null;
 
@@ -38,9 +40,6 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose }) => {
 
   const fullSocialText = `${postCaptions[postTemplate] || postCaptions.emergency}\n${hashtags}`;
   const shareMessage = `Need emergency roof tarping or storm leak repair? Emergency Roof Tarping & Repair Dispatch Hotline: (706) 740-0529. Request instant crew dispatch or instant estimate here: ${currentUrl}`;
-
-  const [smsCopied, setSmsCopied] = useState(false);
-  const [smsStatusMessage, setSmsStatusMessage] = useState<string | null>(null);
 
   const getSmsUrl = () => {
     const encodedBody = encodeURIComponent(shareMessage);
