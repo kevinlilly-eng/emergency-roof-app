@@ -62,6 +62,10 @@ app.get('/og-image.jpg', (req, res) => {
   res.sendFile(path.join(process.cwd(), 'public', 'og-image.jpg'));
 });
 
+app.get('/emergency-tarp-roof-app.zip', (req, res) => {
+  res.download(path.join(process.cwd(), 'public', 'emergency-tarp-roof-app.zip'));
+});
+
 // Endpoint 1: Gemini Contractor Estimate & AI Thoughts Generator
 app.post('/api/gemini/estimate', async (req, res) => {
   try {
