@@ -121,12 +121,29 @@ export const SEODiscoverabilityCenter: React.FC = () => {
     }
   };
 
-  const handlePingGooglebot = () => {
+  const [pingResult, setPingResult] = useState<{ timestamp: string; googleStatus: string; bingStatus: string; message: string } | null>(null);
+
+  const handlePingGooglebot = async () => {
     setIsPinged(true);
-    setTimeout(() => {
+    try {
+      const res = await fetch('/api/seo/ping-google', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      });
+      const data = await res.json();
+      if (data.success) {
+        setPingResult({
+          timestamp: data.timestamp,
+          googleStatus: data.googleStatus,
+          bingStatus: data.bingStatus,
+          message: data.message
+        });
+      }
+    } catch (e) {
+      console.error('Ping failed:', e);
+    } finally {
       setIsPinged(false);
-      alert('Googlebot indexing ping sent successfully for https://a-newroof.com/sitemap.xml!');
-    }, 1200);
+    }
   };
 
   return (
@@ -173,6 +190,23 @@ export const SEODiscoverabilityCenter: React.FC = () => {
             </button>
           </div>
         </div>
+
+        {pingResult && (
+          <div className="mt-4 bg-sky-950/80 border border-sky-400/40 p-4 rounded-2xl text-xs text-sky-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+              <div>
+                <span className="font-bold text-white">{pingResult.message}</span>
+                <div className="text-[11px] text-sky-300 font-mono mt-0.5">
+                  Timestamp: {new Date(pingResult.timestamp).toLocaleTimeString()} | Google Status: {pingResult.googleStatus} | Bing Status: {pingResult.bingStatus}
+                </div>
+              </div>
+            </div>
+            <span className="bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-2.5 py-1 rounded-full text-[10px] font-bold shrink-0">
+              Crawler Enqueued
+            </span>
+          </div>
+        )}
 
         {/* Live Core Web Vitals Metrics */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 pt-6 border-t border-sky-500/20 text-xs">

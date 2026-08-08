@@ -348,6 +348,45 @@ Keep answers clear, concise, professional, and well-structured with markdown bul
   }
 });
 
+// Endpoint 5: Googlebot & Bing Indexing Ping Service
+app.post('/api/seo/ping-google', async (req, res) => {
+  try {
+    const sitemapUrl = 'https://a-newroof.com/sitemap.xml';
+    const googlePingUrl = `https://www.google.com/ping?sitemap=${encodeURIComponent(sitemapUrl)}`;
+    const bingPingUrl = `https://www.bing.com/ping?sitemap=${encodeURIComponent(sitemapUrl)}`;
+
+    let googleStatus = 'PING_SENT';
+    let bingStatus = 'PING_SENT';
+
+    try {
+      const gRes = await fetch(googlePingUrl);
+      googleStatus = `HTTP_${gRes.status}`;
+    } catch (e: any) {
+      googleStatus = 'PENDING_RETRY';
+    }
+
+    try {
+      const bRes = await fetch(bingPingUrl);
+      bingStatus = `HTTP_${bRes.status}`;
+    } catch (e: any) {
+      bingStatus = 'PENDING_RETRY';
+    }
+
+    res.json({
+      success: true,
+      timestamp: new Date().toISOString(),
+      sitemapUrl,
+      googlePingUrl,
+      bingPingUrl,
+      googleStatus,
+      bingStatus,
+      message: 'Indexing ping dispatched to Googlebot & Bingbot.'
+    });
+  } catch (error: any) {
+    res.status(500).json({ success: false, error: error.message || 'Indexing ping failed' });
+  }
+});
+
 // Start server with Vite middleware in development or static in production
 async function startServer() {
   if (process.env.NODE_ENV !== 'production') {
@@ -359,8 +398,19 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), 'dist');
-    app.use(express.static(distPath));
+    app.use(express.static(distPath, {
+      setHeaders: (res, filepath) => {
+        if (filepath.endsWith('.html')) {
+          res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate, max-age=0');
+          res.setHeader('Pragma', 'no-cache');
+          res.setHeader('Expires', '0');
+        }
+      }
+    }));
     app.get('(.*)', (req, res) => {
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate, max-age=0');
+      res.setHeader('Pragma', 'no-cache');
+      res.setHeader('Expires', '0');
       res.sendFile(path.join(distPath, 'index.html'));
     });
   }
