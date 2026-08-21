@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://a-newroof.com/sitemap.xml
-Sitemap: https://www.a-newroof.com/sitemap.xml
+# Prefer sitemap index for crawlers (includes both hostnames)
+Sitemap: https://a-newroof.com/sitemap-index.xml
+Sitemap: https://www.a-newroof.com/sitemap-index.xml
+

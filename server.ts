@@ -64,6 +64,17 @@ app.get('/sitemap.xml', (req, res) => {
   return res.status(404).send('sitemap.xml not found');
 });
 
+app.get('/sitemap-index.xml', (req, res) => {
+  const { content, exists } = readStaticFile('sitemap-index.xml');
+  if (exists) {
+    res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+    return res.status(200).send(content);
+  }
+  return res.status(404).send('sitemap-index.xml not found');
+});
+
 app.get('/robots.txt', (req, res) => {
   const { content, exists } = readStaticFile('robots.txt');
   if (exists) {
